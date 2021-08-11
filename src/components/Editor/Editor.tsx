@@ -9,11 +9,11 @@ import Loading from "../../UI/Loader";
 import MediaCard from "../MediaCard/MediaCard";
 // Material UI
 import KeyboardBackspaceIcon from "@material-ui/icons/KeyboardBackspace";
-import AddIcon from "@material-ui/icons/Add";
 import { Container } from "@material-ui/core";
 import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import { grey, teal } from "@material-ui/core/colors";
+import CreateMediaCard from "../CreateMediaCard/CreateMediaCard";
 
 const useStyles = makeStyles({
   holderCards: {
@@ -74,15 +74,7 @@ const Editor: FC = () => {
           />
         </IconButton>
       </NavLink>
-      <IconButton
-        className={`${classes.icon} ${classes.iconAddposition}`}
-        onClick={() => {}}
-      >
-        <AddIcon
-          color="action"
-          className={`${classes.icon} ${classes.iconAdd}`}
-        />
-      </IconButton>
+      <CreateMediaCard />
       <div className={classes.holderCards}>
         {users.map((user: any) => {
           return (

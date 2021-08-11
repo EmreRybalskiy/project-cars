@@ -2,7 +2,6 @@ import React, { FC, useState, MouseEvent } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 // Components
-import Auth from "../Auth/Auth";
 // Material UI
 import {
   AppBar,
@@ -17,6 +16,8 @@ import {
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import { grey, teal } from "@material-ui/core/colors";
 import { makeStyles } from "@material-ui/core/styles";
+import Register from "../Auth/Register";
+import Login from "../Auth/Login";
 
 const useStyles = makeStyles({
   navMenu: {
@@ -90,7 +91,8 @@ const Header: FC = () => {
           >
             <MoreVertIcon />
           </IconButton>
-          <Auth />
+          <Login />
+          <Register />
         </Box>
       </Toolbar>
     </AppBar>
