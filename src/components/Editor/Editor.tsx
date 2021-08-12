@@ -7,14 +7,16 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Container } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 // Components
-import Loader from 'src/UI/Loader';
-import fetchUsers from 'src/store/actionCreator/user';
+import Loader from 'UI/Loader';
+import fetchUsers from 'store/actionCreator/user';
+import { Users } from 'types/user';
 import MediaCard from '../MediaCard/MediaCard';
 import CreateMediaCard from '../CreateMediaCard/CreateMediaCard';
 // hook
 import useTypeSelector from '../hooks/useTypeSelector';
 // styles
 import useStyles from './styles';
+// Types
 
 const Editor: FC = () => {
   const { users, error, loading } = useTypeSelector((state) => state.user);
@@ -47,7 +49,7 @@ const Editor: FC = () => {
       </NavLink>
       <CreateMediaCard />
       <div className={classes.holderCards}>
-        {users.map((user) => (
+        {users.map((user: Users) => (
           <MediaCard
             key={user.id}
             userName={user.name}

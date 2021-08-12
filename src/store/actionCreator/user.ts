@@ -1,16 +1,15 @@
+import { UserAction, UserActionTypes } from 'types/user';
 import { Dispatch } from 'redux';
 import axios from 'axios';
-import { UserAction, UserActionTypes } from 'src/types/user';
 
-const fetchUsers = (): unknown => async (dispatch: Dispatch<UserAction>) => {
+const fetchUsers = () => async (dispatch: Dispatch<UserAction>): Promise<void> => {
   try {
     dispatch({ type: UserActionTypes.FETCH_USERS });
     const response = await axios.get('https://jsonplaceholder.typicode.com/users');
-    setTimeout(() => {
-      dispatch({ type: UserActionTypes.FETCH_USERS_SUCCES, payload: response.data });
-    }, 500);
+    dispatch({ type: UserActionTypes.FETCH_USERS_SUCCES, payload: response.data });
   } catch (e) {
     dispatch({ type: UserActionTypes.FETCH_USERS_ERROR, payload: 'Произошла ошибка при загрузке пользователей' });
   }
 };
+
 export default fetchUsers;

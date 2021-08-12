@@ -2,9 +2,11 @@ import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 // Components
-import fetchUsers from 'src/store/actionCreator/user';
+import fetchUsers from 'store/actionCreator/user';
+import { Users } from 'types/user';
 import Loading from '../../UI/Loader';
 import MediaCard from '../MediaCard/MediaCard';
+
 // hook
 import useTypeSelector from '../hooks/useTypeSelector';
 // Styles
@@ -31,7 +33,7 @@ const Catalog: FC = () => {
   }
   return (
     <div className={classes.holder}>
-      {users.map((user) => (
+      {users.map((user: Users) => (
         <MediaCard
           key={user.id}
           userName={user.name}

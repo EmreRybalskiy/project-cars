@@ -1,5 +1,15 @@
+export interface Users {
+    id: number,
+    name: string,
+    company: {
+      name: string
+    }
+    email: string
+  }
+
+// Redux
 export interface UserState {
-    users: any[],
+    users: Users[],
     loading: boolean,
     error: null | string
 }
