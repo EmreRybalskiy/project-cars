@@ -1,13 +1,23 @@
+export interface Users {
+    id: number,
+    name: string,
+    company: {
+      name: string
+    }
+    email: string
+  }
+
+// Redux
 export interface UserState {
-    users: any[],
+    users: Users[],
     loading: boolean,
     error: null | string
 }
 
 export enum UserActionTypes {
-    FETCH_USERS = "FETCH_USERS",
-    FETCH_USERS_SUCCES = "FETCH_USERS_SUCCES",
-    FETCH_USERS_ERROR = "FETCH_USERS_ERROR"
+    FETCH_USERS = 'FETCH_USERS',
+    FETCH_USERS_SUCCES = 'FETCH_USERS_SUCCES',
+    FETCH_USERS_ERROR = 'FETCH_USERS_ERROR'
 }
 
 export interface FetchUsersAction {

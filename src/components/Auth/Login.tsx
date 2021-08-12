@@ -1,15 +1,14 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { FormControl } from "@material-ui/core";
-
+// Material UI
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { FormControl } from '@material-ui/core';
 // styles
-
-import { useStyles } from "./styles";
+import useStyles from './styles';
 
 const Login: FC = () => {
   const [open, setOpen] = useState(false);
@@ -37,8 +36,8 @@ const Login: FC = () => {
         <FormControl className={classes.formControl}>
           <TextField
             autoFocus
-            label="Name"
-            type="text"
+            label="Email"
+            type="email"
             className={classes.field}
           />
           <TextField

@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Dima",
+      "password": "Dima12345",
+      "email": "dima@gmail.com"
+    }
+  ],
+  "cars": [
+    
+  ]
+}
