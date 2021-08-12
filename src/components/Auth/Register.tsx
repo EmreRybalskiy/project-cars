@@ -42,6 +42,12 @@ const Register: FC = () => {
           />
           <TextField
             autoFocus
+            label="Email"
+            type="email"
+            className={classes.field}
+          />
+          <TextField
+            autoFocus
             label="Password"
             type="password"
             className={classes.field}

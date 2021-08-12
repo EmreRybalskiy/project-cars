@@ -11,11 +11,11 @@ const useStyles = makeStyles({
   },
   formControl: {
     width: 500,
-    height: 200,
+    height: 300,
     textAlign: 'center',
   },
   field: {
-    margin: '20px auto',
+    margin: '10px auto',
     width: '80%',
     color: teal[400],
   },

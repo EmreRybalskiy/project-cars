@@ -2,68 +2,12 @@
   "users": [
     {
       "id": "1",
-      "firstName": "Dima",
-      "lastName": "Supov",
-      "email": "john@gmail.com",
-      "age": 23,
-      "comapnyId": "1"
-    },
-    {
-      "id": "2",
-      "firstName": "Mikhail",
-      "lastName": "Borshev",
-      "email": "mikhail@gmail.com",
-      "age": 54,
-      "comapnyId": "2"
-    },
-    {
-      "id": "3",
-      "firstName": "Vlad",
-      "lastName": "Kalashnikov",
-      "email": "vlad@gmail.com",
-      "age": 52,
-      "comapnyId": "3"
-    },
-    {
-      "id": "4",
-      "firstName": "Andrey",
-      "lastName": "Kapustnikov",
-      "email": "andrey@gmail.com",
-      "age": 13,
-      "comapnyId": "4"
-    },
-    {
-      "id": "5",
-      "firstName": "Kirill",
-      "lastName": "Baklajan",
-      "email": "kirill@gmail.com",
-      "age": 2,
-      "comapnyId": "5"
-    },
-    {
-      "id": "6",
-      "firstName": "Dan",
-      "lastName": "Jomi",
-      "email": "jomi@gmail.com",
-      "age": 52,
-      "comapnyId": "6"
+      "name": "Dima",
+      "password": "Dima12345",
+      "email": "dima@gmail.com"
     }
   ],
-  "companies": [
-    {
-      "id": "1",
-      "name": "Apple",
-      "description": "Apple is an American corporation that manufactures personal and tablet computers, audio players, smartphones, and software. One of the pioneers in the field of personal computers and modern multitasking operating systems with a graphical interface. Headquarters - Cupertino, California."
-    },
-    {
-      "id": "2",
-      "name": "Google",
-      "description": "Microsoft is one of the largest multinational companies producing proprietary software for various kinds of computing equipment - personal computers, game consoles, PDAs, mobile phones and others."
-    },
-    {
-      "id": "3",
-      "name": "Microsoft",
-      "description": "Google is an American multinational corporation, part of the Alphabet holding, investing in Internet search, cloud computing and advertising technologies. Google maintains and develops a number of Internet services and products and makes profit primarily from advertising through its Ads program."
-    }
+  "cars": [
+    
   ]
 }

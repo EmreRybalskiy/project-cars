@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { grey, teal } from '@material-ui/core/colors';
+import { grey } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   holderCards: {
@@ -19,15 +19,6 @@ const useStyles = makeStyles({
     position: 'fixed',
     top: 70,
     left: 10,
-  },
-  iconAdd: {
-    color: teal[400],
-    fontSize: 50,
-  },
-  iconAddposition: {
-    position: 'fixed',
-    bottom: 100,
-    right: 100,
   },
 });
 

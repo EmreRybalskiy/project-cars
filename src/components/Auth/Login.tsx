@@ -36,8 +36,8 @@ const Login: FC = () => {
         <FormControl className={classes.formControl}>
           <TextField
             autoFocus
-            label="Name"
-            type="text"
+            label="Email"
+            type="email"
             className={classes.field}
           />
           <TextField

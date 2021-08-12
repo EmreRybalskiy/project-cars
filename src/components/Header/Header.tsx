@@ -37,7 +37,7 @@ const Header: FC = () => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.navMenu}>
-        <Typography variant="h4">Cars</Typography>
+        <Typography variant="h4">Catalog</Typography>
         <Box>
           <Menu
             id="fade-menu"

@@ -1,12 +1,12 @@
 import React, { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-// Material UI
-import useTypeSelector from '../hooks/useTypeSelector';
-import fetchUsers from '../../store/actionCreator/user';
 // Components
+import fetchUsers from 'src/store/actionCreator/user';
 import Loading from '../../UI/Loader';
 import MediaCard from '../MediaCard/MediaCard';
+// hook
+import useTypeSelector from '../hooks/useTypeSelector';
 // Styles
 import useStyles from './styles';
 

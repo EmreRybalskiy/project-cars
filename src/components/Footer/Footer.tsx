@@ -10,6 +10,7 @@ const Footer: FC = () => {
 
   return (
     <div className={classes.footer}>
+
       <Typography className={classes.footerText}>Footer</Typography>
     </div>
   );

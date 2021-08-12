@@ -14,6 +14,7 @@ const useStyles = makeStyles({
   iconAdd: {
     color: teal[400],
     fontSize: 50,
+    zIndex: 999,
   },
   iconAddposition: {
     position: 'fixed',

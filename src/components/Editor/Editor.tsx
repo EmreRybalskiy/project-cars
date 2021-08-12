@@ -7,12 +7,12 @@ import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Container } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 // Components
-import Loading from '../../UI/Loader';
+import Loader from 'src/UI/Loader';
+import fetchUsers from 'src/store/actionCreator/user';
 import MediaCard from '../MediaCard/MediaCard';
 import CreateMediaCard from '../CreateMediaCard/CreateMediaCard';
-// any
+// hook
 import useTypeSelector from '../hooks/useTypeSelector';
-import fetchUsers from '../../store/actionCreator/user';
 // styles
 import useStyles from './styles';
 
@@ -28,7 +28,7 @@ const Editor: FC = () => {
   if (loading) {
     return (
       <>
-        <Loading />
+        <Loader />
       </>
     );
   }
