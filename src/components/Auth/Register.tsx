@@ -1,15 +1,14 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState } from 'react';
 
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import { FormControl } from "@material-ui/core";
-
+// Materiaul UI
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import { FormControl } from '@material-ui/core';
 // styles
-
-import { useStyles } from "./styles";
+import useStyles from './styles';
 
 const Register: FC = () => {
   const [open, setOpen] = useState(false);

@@ -1,7 +1,6 @@
-import React, { FC, useState, MouseEvent } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import React, { FC, useState, MouseEvent } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 
-// Components
 // Material UI
 import {
   AppBar,
@@ -12,30 +11,13 @@ import {
   MenuItem,
   Toolbar,
   Typography,
-} from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import { grey, teal } from "@material-ui/core/colors";
-import { makeStyles } from "@material-ui/core/styles";
-import Register from "../Auth/Register";
-import Login from "../Auth/Login";
-
-const useStyles = makeStyles({
-  navMenu: {
-    display: "flex",
-    justifyContent: "space-between",
-    background: teal[400],
-  },
-  link: {
-    fontSize: 15,
-    textDecoration: "none",
-    color: grey[900],
-  },
-  hover: {
-    "&:hover": {
-      color: teal[400],
-    },
-  },
-});
+} from '@material-ui/core';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+// Components
+import Register from '../Auth/Register';
+import Login from '../Auth/Login';
+// Styles
+import useStyles from './styles';
 
 const Header: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -66,12 +48,12 @@ const Header: FC = () => {
             TransitionComponent={Fade}
             style={{ left: -80, top: -2 }}
           >
-            {" "}
+            {' '}
             <NavLink
               to="/editor"
               className={`${classes.link} ${classes.hover}`}
             >
-              {location.pathname !== "/editor" && (
+              {location.pathname !== '/editor' && (
                 <MenuItem onClick={handleClose}>Editor</MenuItem>
               )}
             </NavLink>

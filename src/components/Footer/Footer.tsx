@@ -1,21 +1,9 @@
-import React, { FC } from "react";
-// Components
+import React, { FC } from 'react';
 
 // Material UI
-import { teal, grey } from "@material-ui/core/colors";
-import { Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-
-const useStyles = makeStyles({
-  footer: {
-    textAlign: "center",
-    background: teal[400],
-    minHeight: "60px",
-  },
-  footerText: {
-    color: grey[50],
-  },
-});
+import { Typography } from '@material-ui/core';
+// Styles
+import useStyles from './styles';
 
 const Footer: FC = () => {
   const classes = useStyles();

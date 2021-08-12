@@ -1,7 +1,8 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
-const FormDialog: FC = () => {
-  return <>{"to do"}</>;
-};
+const a = '2';
+const FormDialog: FC = () => (
+  <div>{a}</div>
+);
 
 export default FormDialog;
