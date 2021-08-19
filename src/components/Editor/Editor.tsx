@@ -1,4 +1,7 @@
-import React, { FC, useEffect } from 'react';
+import React, {
+  FC,
+  useEffect,
+} from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
@@ -8,8 +11,8 @@ import { Container } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 // Components
 import Loader from 'UI/Loader';
-import fetchUsers from 'store/actionCreator/user';
-import { Users } from 'types/user';
+import fetchCars from 'store/actionCreator/user';
+import { Cars } from 'types/cars';
 import MediaCard from '../MediaCard/MediaCard';
 import CreateMediaCard from '../CreateMediaCard/CreateMediaCard';
 // hook
@@ -19,12 +22,12 @@ import useStyles from './styles';
 // Types
 
 const Editor: FC = () => {
-  const { users, error, loading } = useTypeSelector((state) => state.user);
   const classes = useStyles();
+  const { cars, error, loading } = useTypeSelector((state) => state.cars);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    dispatch(fetchCars());
   }, []);
 
   if (loading) {
@@ -49,12 +52,17 @@ const Editor: FC = () => {
       </NavLink>
       <CreateMediaCard />
       <div className={classes.holderCards}>
-        {users.map((user: Users) => (
+        {cars.map((car: Cars) => (
           <MediaCard
-            key={user.id}
-            userName={user.name}
-            company={user.company.name}
-            email={user.email}
+            id={car.id}
+            key={car.id}
+            image={car.image}
+            brand={car.brand}
+            color={car.color}
+            year={car.year}
+            engineType={car.engineType}
+            fuelType={car.fuelType}
+            transmission={car.transmission}
           />
         ))}
       </div>

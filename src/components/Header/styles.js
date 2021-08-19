@@ -7,15 +7,15 @@ const useStyles = makeStyles({
     justifyContent: 'space-between',
     background: teal[400],
   },
-  link: {
-    fontSize: 15,
-    textDecoration: 'none',
-    color: grey[900],
+  loginBtn: {
+    color: grey[100],
   },
-  hover: {
-    '&:hover': {
-      color: teal[400],
-    },
+  authMenu: {
+    display: 'flex',
+  },
+  navLogo: {
+    textDecoration: 'none',
+    color: grey[200],
   },
 });
 

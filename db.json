@@ -1,13 +1,45 @@
 {
   "users": [
     {
-      "id": "1",
+      "email": "Emre12345@mail.ru",
+      "password": "$2a$10$6pTd3f4DVb8RL5drhWpj9OMLP1fcQkO49lK3Lwoe90uMnznS9fSLa",
+      "name": "Emre",
+      "favorites": [],
+      "id": 1,
+      "isAdmin": true
+    },
+    {
+      "email": "Dima12345@mail.ru",
+      "password": "$2a$10$k0DUc52uCS6cID2Tw5JhEe.WdV6bbFPMvfceumD6Kmvlq9GwytqKy",
       "name": "Dima",
-      "password": "Dima12345",
-      "email": "dima@gmail.com"
+      "favorites": [
+        1,
+        2,
+        3
+      ],
+      "id": 2
     }
   ],
   "cars": [
-    
+    {
+      "image": "blob:http://localhost:3001/a663f1cc-af5b-4af4-9a7a-727359698d75",
+      "brand": "Alfa Romeo",
+      "color": "Red",
+      "year": "2006",
+      "engineType": "2",
+      "fuelType": "Diesel",
+      "transmission": "Manual",
+      "id": 1
+    },
+    {
+      "image": "blob:http://localhost:3001/37077093-a106-4153-93a6-c9dde1991f18",
+      "brand": "Mercedes",
+      "color": "Black",
+      "year": "2005",
+      "engineType": "3",
+      "fuelType": "Deisel",
+      "transmission": "Manual",
+      "id": 2
+    }
   ]
 }
