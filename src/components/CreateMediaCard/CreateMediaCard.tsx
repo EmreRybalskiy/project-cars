@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import {
   Cars,
-  // GenericCarImage
 } from 'types/cars';
 
 // MaterialUI

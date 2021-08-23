@@ -10,7 +10,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
 import Checkbox from '@material-ui/core/Checkbox';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
@@ -52,12 +51,11 @@ const addFavoriteCard = async (id: number) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    throw Error(e);
   }
 };
 
 const removeCar = async (id: number) => {
-  console.log(id);
   const token = JSON.parse(localStorage.getItem('token') as string);
   const userID = JSON.parse(localStorage.getItem('userID') as string);
   try {
@@ -66,12 +64,7 @@ const removeCar = async (id: number) => {
       url: `http://localhost:3000/users/${userID}`,
     });
     const { favorites } = getUser.data;
-    console.log(favorites);
-    const deletedFavoriteCar = favorites.filter((item: number) => {
-      console.log(item);
-      return item !== id;
-    });
-    console.log(deletedFavoriteCar);
+    const deletedFavoriteCar = favorites.filter((item: number) => item !== id);
     await axios.patch(`http://localhost:3000/users/${userID}`, {
       favorites: [...deletedFavoriteCar],
     }, {
@@ -80,14 +73,13 @@ const removeCar = async (id: number) => {
       },
     });
   } catch (e) {
-    console.log(e);
+    throw Error(e);
   }
 };
 
 const MediaCard: FC<CardProps> = ({
   image, brand, color, year, engineType, fuelType, transmission, id,
 }: Cars) => {
-  console.log(id);
   const classes = useStyles();
   const location = useLocation();
 
@@ -141,9 +133,6 @@ const MediaCard: FC<CardProps> = ({
       ) : null}
       {location.pathname === '/editor' && (
         <CardActions className={classes.iconHolder}>
-          <IconButton className={classes.icon}>
-            <EditIcon color="primary" className={classes.icon} />
-          </IconButton>
           <IconButton className={classes.icon}>
             <DeleteIcon color="secondary" className={classes.icon} />
           </IconButton>

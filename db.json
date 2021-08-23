@@ -5,8 +5,7 @@
       "password": "$2a$10$6pTd3f4DVb8RL5drhWpj9OMLP1fcQkO49lK3Lwoe90uMnznS9fSLa",
       "name": "Emre",
       "favorites": [
-        1,
-        2
+        1
       ],
       "id": 1,
       "isAdmin": true
@@ -16,9 +15,8 @@
       "password": "$2a$10$k0DUc52uCS6cID2Tw5JhEe.WdV6bbFPMvfceumD6Kmvlq9GwytqKy",
       "name": "Dima",
       "favorites": [
-        1,
-        2,
-        3
+        3,
+        1
       ],
       "id": 2
     }
@@ -43,6 +41,16 @@
       "fuelType": "Deisel",
       "transmission": "Manual",
       "id": 2
+    },
+    {
+      "image": "blob:http://localhost:3001/b91fc184-1741-466e-bbdc-eb3b28429787",
+      "brand": "Toyota",
+      "color": "Blue",
+      "year": "2019",
+      "engineType": "2.2",
+      "fuelType": "Diesel",
+      "transmission": "Manual",
+      "id": 3
     }
   ]
 }

@@ -11,7 +11,7 @@ import useStyles from './styles';
 
 const Favorites: FC = () => {
   const classes = useStyles();
-  const { error, loading } = useTypeSelector(({ cars }) => cars);
+  const { cars, error, loading } = useTypeSelector((state) => state.cars);
   const [userFavorites, setUserFavorites] = useState<[]>([]);
   const dispatch = useDispatch();
 
@@ -30,7 +30,7 @@ const Favorites: FC = () => {
       const userFav = getUser.data.favorites;
       setUserFavorites(userFav);
     } catch (e) {
-      console.log(e);
+      throw Error(e);
     }
   };
 
@@ -44,23 +44,30 @@ const Favorites: FC = () => {
   if (error) {
     return <p>Error</p>;
   }
+
   return (
     <>
       {userFavorites ? (
         <div className={classes.wrapperCars}>
-          {userFavorites.map((car: Cars) => (
-            <MediaCard
-              id={car.id}
-              key={car.id}
-              image={car.image}
-              brand={car.brand}
-              color={car.color}
-              year={car.year}
-              engineType={car.engineType}
-              fuelType={car.fuelType}
-              transmission={car.transmission}
-            />
-          ))}
+          {cars.map((car: Cars) => {
+            const a = userFavorites.filter((el) => car.id === el);
+            if (car.id === +a) {
+              return (
+                <MediaCard
+                  id={car.id}
+                  key={car.id}
+                  image={car.image}
+                  brand={car.brand}
+                  color={car.color}
+                  year={car.year}
+                  engineType={car.engineType}
+                  fuelType={car.fuelType}
+                  transmission={car.transmission}
+                />
+              );
+            }
+            return null;
+          })}
         </div>
       ) : null}
     </>

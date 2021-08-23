@@ -57,6 +57,9 @@ const SignIn: FC = () => {
   };
 
   const handleClickOpemSignIn = () => {
+    if (userName) {
+      return;
+    }
     setDialogOpen(true);
   };
 
