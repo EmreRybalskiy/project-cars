@@ -74,13 +74,14 @@ const SignIn: FC = () => {
 
   const handleLogout = () => {
     localStorage.clear();
+    setUserName('');
+    setIsLoggin(false);
     closeMenu();
   };
 
   const login = async () => {
     try {
       const response = await axios.post('http://localhost:3000/login', { email: userEmail, password: userPassword });
-      console.log(response);
       setUserName(response.data.user.name);
       setIsLoggin(true);
       if (response.data.user.isAdmin !== undefined) {
@@ -90,13 +91,12 @@ const SignIn: FC = () => {
       }
       const userId = response.data.user.id;
       const token = response.data.accessToken;
-      console.log(userId);
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('userID', JSON.stringify(userId));
       setAuthorizationToken(token);
     } catch (e) {
       setIsLoggin(false);
-      console.log(e);
+      throw Error(e);
     }
     handleClickCloseSignIn();
     cleaningFields();

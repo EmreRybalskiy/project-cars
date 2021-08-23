@@ -57,6 +57,7 @@ const addFavoriteCard = async (id: number) => {
 };
 
 const removeCar = async (id: number) => {
+  console.log(id);
   const token = JSON.parse(localStorage.getItem('token') as string);
   const userID = JSON.parse(localStorage.getItem('userID') as string);
   try {
@@ -65,7 +66,11 @@ const removeCar = async (id: number) => {
       url: `http://localhost:3000/users/${userID}`,
     });
     const { favorites } = getUser.data;
-    const deletedFavoriteCar = favorites.filter((item: number) => item !== id);
+    console.log(favorites);
+    const deletedFavoriteCar = favorites.filter((item: number) => {
+      console.log(item);
+      return item !== id;
+    });
     console.log(deletedFavoriteCar);
     await axios.patch(`http://localhost:3000/users/${userID}`, {
       favorites: [...deletedFavoriteCar],
@@ -82,6 +87,7 @@ const removeCar = async (id: number) => {
 const MediaCard: FC<CardProps> = ({
   image, brand, color, year, engineType, fuelType, transmission, id,
 }: Cars) => {
+  console.log(id);
   const classes = useStyles();
   const location = useLocation();
 

@@ -4,7 +4,10 @@
       "email": "Emre12345@mail.ru",
       "password": "$2a$10$6pTd3f4DVb8RL5drhWpj9OMLP1fcQkO49lK3Lwoe90uMnznS9fSLa",
       "name": "Emre",
-      "favorites": [],
+      "favorites": [
+        1,
+        2
+      ],
       "id": 1,
       "isAdmin": true
     },
