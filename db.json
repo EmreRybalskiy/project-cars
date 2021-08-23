@@ -5,7 +5,8 @@
       "password": "$2a$10$6pTd3f4DVb8RL5drhWpj9OMLP1fcQkO49lK3Lwoe90uMnznS9fSLa",
       "name": "Emre",
       "favorites": [
-        1
+        1,
+        2
       ],
       "id": 1,
       "isAdmin": true
@@ -51,6 +52,16 @@
       "fuelType": "Diesel",
       "transmission": "Manual",
       "id": 3
+    },
+    {
+      "image": "blob:http://localhost:3001/0e705606-0f33-4500-998f-d6a68ee0a9ea",
+      "brand": "1",
+      "color": "1",
+      "year": "1",
+      "engineType": "1",
+      "fuelType": "1",
+      "transmission": "1",
+      "id": 4
     }
   ]
 }

@@ -84,7 +84,7 @@ const CreateMediaCard: FC = () => {
       try {
         await axios.post('http://localhost:3000/cars', car);
       } catch (e) {
-        console.log(e);
+        throw Error(e);
       }
     }
     cleaningFields();

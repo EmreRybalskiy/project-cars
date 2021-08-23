@@ -3,7 +3,7 @@ import React, {
   useEffect,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 // Components
 import fetchCars from 'store/actionCreator/cars';
@@ -39,6 +39,11 @@ const Catalog: FC = () => {
   return (
     <div className={classes.holder}>
       {cars.map((car: Cars) => (
+        // <Link to={{
+        //   pathname: `/car/${car.id}`,
+        //   state: car,
+        // }}
+        // >
         <MediaCard
           id={car.id}
           key={car.id}
@@ -50,6 +55,7 @@ const Catalog: FC = () => {
           fuelType={car.fuelType}
           transmission={car.transmission}
         />
+        // </Link>
       ))}
     </div>
   );

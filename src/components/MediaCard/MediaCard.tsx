@@ -99,27 +99,38 @@ const MediaCard: FC<CardProps> = ({
           Color:
           {color}
         </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Year:
-          {year}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Endine Type:
-          {engineType}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Fuel Type:
-          {fuelType}
-        </Typography>
-        <Typography variant="body2" color="textSecondary" component="p">
-          Transmission:
-          {transmission}
-        </Typography>
+        {location.pathname === `/car/${id}` && (
+        <>
+          {' '}
+          <Typography variant="body2" color="textSecondary" component="p">
+            Year:
+            {year}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Endine Type:
+            {engineType}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Fuel Type:
+            {fuelType}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            Transmission:
+            {transmission}
+          </Typography>
+        </>
+        )}
       </CardContent>
       {location.pathname === '/favorites' && <Button onClick={() => removeCar(id as number)} color="secondary">Remove from Favorites</Button>}
       {(location.pathname === '/' || location.pathname === '/editor') ? (
         <Box className={classes.cardFooter}>
-          <Link to={`/car/${id}`}>
+          <Link to={{
+            pathname: `/car/${id}`,
+            state: {
+              image, brand, color, year, engineType, fuelType, transmission, id,
+            },
+          }}
+          >
             <Button size="small" color="primary">
               Learn More
             </Button>

@@ -94,7 +94,7 @@ const SignUp: FC = () => {
       await axios.post('http://localhost:3000/register', newUser);
       dispatch(fetchUsers());
     } catch (e) {
-      console.log(e);
+      throw Error(e);
     }
   };
 
