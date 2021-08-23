@@ -3,6 +3,7 @@ import React, {
   useEffect,
 } from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 // Components
 import fetchCars from 'store/actionCreator/cars';
