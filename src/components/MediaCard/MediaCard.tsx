@@ -122,8 +122,8 @@ const MediaCard: FC<CardProps> = ({
         )}
       </CardContent>
       {location.pathname === '/favorites' && <Button onClick={() => removeCar(id as number)} color="secondary">Remove from Favorites</Button>}
-      {(location.pathname === '/' || location.pathname === '/editor') ? (
-        <Box className={classes.cardFooter}>
+      <Box className={classes.cardFooter}>
+        {(location.pathname === '/' || location.pathname === '/editor' || location.pathname === '/favorites') ? (
           <Link to={{
             pathname: `/car/${id}`,
             state: {
@@ -135,13 +135,17 @@ const MediaCard: FC<CardProps> = ({
               Learn More
             </Button>
           </Link>
-          <FormControlLabel
-            onClick={() => addFavoriteCard(id as number)}
-            control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
-            label="Favorite"
-          />
-        </Box>
-      ) : null}
+        ) : null}
+        {(location.pathname === `/car/${id}` || location.pathname === '/' || location.pathname === '/editor') ? (
+          <>
+            <FormControlLabel
+              onClick={() => addFavoriteCard(id as number)}
+              control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
+              label="Favorite"
+            />
+          </>
+        ) : null}
+      </Box>
       {location.pathname === '/editor' && (
         <CardActions className={classes.iconHolder}>
           <IconButton className={classes.icon}>
