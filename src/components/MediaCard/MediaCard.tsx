@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import axios from 'axios';
 
 // Material Ui
@@ -121,9 +121,11 @@ const MediaCard: FC<CardProps> = ({
       {location.pathname === '/favorites' && <Button onClick={() => removeCar(id as number)} color="secondary">Remove from Favorites</Button>}
       {(location.pathname === '/' || location.pathname === '/editor') ? (
         <Box className={classes.cardFooter}>
-          <Button size="small" color="primary">
-            Learn More
-          </Button>
+          <Link to={`/car/${id}`}>
+            <Button size="small" color="primary">
+              Learn More
+            </Button>
+          </Link>
           <FormControlLabel
             onClick={() => addFavoriteCard(id as number)}
             control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
