@@ -30,6 +30,5 @@ module.exports = {
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-var-requires': 0,
-    'dot-notation': 0,
   },
 };

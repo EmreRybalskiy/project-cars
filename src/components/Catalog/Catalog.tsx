@@ -1,62 +1,48 @@
 import React, {
   FC,
+  MouseEvent,
   useEffect,
+  useState,
 } from 'react';
 import { useDispatch } from 'react-redux';
-// import { Link } from 'react-router-dom';
 
-// Components
 import fetchCars from 'store/actionCreator/cars';
-import { Cars } from 'types/cars';
-import Loading from '../../UI/Loader';
-import MediaCard from '../MediaCard/MediaCard';
-
+// Components
+import OurCars from './OurCars';
+import Pagination from './Pagination';
 // hook
 import useTypeSelector from '../hooks/useTypeSelector';
-// Styles
-import useStyles from './styles';
 
 const Catalog: FC = () => {
-  const classes = useStyles();
   const { cars, loading, error } = useTypeSelector((state) => state.cars);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [carsPerPage] = useState(4);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchCars());
   }, []);
 
-  if (loading) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
-  if (error) {
-    return <p>Error</p>;
-  }
+  const indexOFLastCar = currentPage * carsPerPage;
+  const indexOfFirstCar = indexOFLastCar - carsPerPage;
+  const currentCar = cars.slice(indexOfFirstCar, indexOFLastCar);
+
+  const paginate = (event: MouseEvent<HTMLElement>) : void => {
+    if (event.currentTarget.textContent !== null) {
+      const currentPage = +event.currentTarget.textContent;
+      setCurrentPage(currentPage);
+    }
+  };
 
   return (
-    <div className={classes.holder}>
-      {cars.map((car: Cars) => (
-        // <Link to={{
-        //   pathname: `/car/${car.id}`,
-        //   state: car,
-        // }}
-        // >
-        <MediaCard
-          id={car.id}
-          key={car.id}
-          image={car.image}
-          brand={car.brand}
-          color={car.color}
-          year={car.year}
-          engineType={car.engineType}
-          fuelType={car.fuelType}
-          transmission={car.transmission}
-        />
-        // </Link>
-      ))}
+    <div>
+      <OurCars cars={currentCar} loading={loading} error={error} />
+      <Pagination
+        carsPerPage={carsPerPage}
+        totalCars={cars}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
