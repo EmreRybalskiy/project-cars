@@ -1,6 +1,10 @@
-import React, { FC, useEffect } from 'react';
+import React, {
+  FC,
+  useEffect,
+  useState,
+} from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 // MaterialUI
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -8,23 +12,33 @@ import { Container } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 // Components
 import Loader from 'UI/Loader';
-import fetchUsers from 'store/actionCreator/user';
-import { Users } from 'types/user';
+import { Cars } from 'types/cars';
 import MediaCard from '../MediaCard/MediaCard';
 import CreateMediaCard from '../CreateMediaCard/CreateMediaCard';
-// hook
-import useTypeSelector from '../hooks/useTypeSelector';
 // styles
 import useStyles from './styles';
 // Types
 
 const Editor: FC = () => {
-  const { users, error, loading } = useTypeSelector((state) => state.user);
   const classes = useStyles();
-  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    const fetchCars = async () => {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'http://localhost:3000/cars',
+        });
+        setLoading(false);
+        setData(response.data);
+      } catch (e) {
+        setError(e);
+      }
+    };
+    fetchCars();
   }, []);
 
   if (loading) {
@@ -49,12 +63,17 @@ const Editor: FC = () => {
       </NavLink>
       <CreateMediaCard />
       <div className={classes.holderCards}>
-        {users.map((user: Users) => (
+        {data.map((car: Cars) => (
           <MediaCard
-            key={user.id}
-            userName={user.name}
-            company={user.company.name}
-            email={user.email}
+            id={car.id}
+            key={car.id}
+            image={car.image}
+            brand={car.brand}
+            color={car.color}
+            year={car.year}
+            engineType={car.engineType}
+            fuelType={car.fuelType}
+            transmission={car.transmission}
           />
         ))}
       </div>

@@ -1,4 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, {
+  ChangeEvent, FC, useState,
+} from 'react';
+import axios from 'axios';
+
+import {
+  Cars,
+} from 'types/cars';
 
 // MaterialUI
 import {
@@ -8,6 +15,7 @@ import {
   IconButton,
   FormControl,
   Box,
+  // Typography,
 } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import AddIcon from '@material-ui/icons/Add';
@@ -16,16 +24,71 @@ import Dialog from '@material-ui/core/Dialog';
 import useStyles from './styles';
 
 const CreateMediaCard: FC = () => {
-  const [open, setOpen] = useState(false);
-
   const classes = useStyles();
+  const [open, setOpen] = useState<boolean>(false);
 
-  const handleClickOpen = () => {
+  const [car, setCar] = useState<Cars>({
+    image: '',
+    brand: '',
+    color: '',
+    year: '',
+    engineType: '',
+    fuelType: '',
+    transmission: '',
+  });
+
+  const isCar = car.image && car.brand
+   && car.color && car.year
+    && car.engineType && car.fuelType
+     && car.transmission;
+
+  const cleaningFields = (): void => {
+    setCar({
+      image: '',
+      brand: '',
+      color: '',
+      year: '',
+      engineType: '',
+      fuelType: '',
+      transmission: '',
+    });
+  };
+
+  const handleClickOpen = (): void => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (): void => {
+    cleaningFields();
     setOpen(false);
+  };
+
+  const handleChangeDataCar = ({ target } : ChangeEvent<HTMLInputElement>): void => {
+    setCar((prev) => ({
+      ...prev,
+      [target.name]: target.value,
+    }));
+  };
+
+  const upLoadImage = ({ target } : ChangeEvent<HTMLInputElement>): void => {
+    if (target.files !== null && target.files.length !== 0) {
+      const file = URL.createObjectURL(target.files[0]);
+      setCar((prev) => ({
+        ...prev,
+        image: file,
+      }));
+    }
+  };
+  const createCar = async () => {
+    if (isCar) {
+      try {
+        await axios.post('http://localhost:3000/cars', car);
+      } catch (e) {
+        throw Error(e);
+      }
+    }
+    cleaningFields();
+    handleClose();
   };
   return (
     <div>
@@ -52,46 +115,77 @@ const CreateMediaCard: FC = () => {
             <TextField
               autoFocus
               label="Brand"
+              name="brand"
               type="text"
               className={classes.field}
+              onChange={handleChangeDataCar}
             />
             <TextField
               autoFocus
               label="Color"
+              name="color"
               type="text"
               className={classes.field}
+              onChange={handleChangeDataCar}
+
             />
             <TextField
               autoFocus
               label="Year"
+              name="year"
               type="text"
               className={classes.field}
+              onChange={handleChangeDataCar}
+
+            />
+            <TextField
+              autoFocus
+              label="Engine Type"
+              name="engineType"
+              type="text"
+              className={classes.field}
+              onChange={handleChangeDataCar}
+
             />
             <TextField
               autoFocus
               label="Fuel Type"
+              name="fuelType"
               type="text"
               className={classes.field}
+              onChange={handleChangeDataCar}
+
             />
             <TextField
               autoFocus
-              label="Engine"
+              label="Transmission"
+              name="transmission"
               type="text"
               className={classes.field}
+              onChange={handleChangeDataCar}
+
             />
-            <TextField
-              autoFocus
-              label="Price"
-              type="text"
-              className={classes.field}
-            />
+            <Box className={classes.upload}>
+              <Button
+                variant="contained"
+                component="label"
+              >
+                Upload File
+                <input
+                  type="file"
+                  name="image"
+                  hidden
+                  onChange={upLoadImage}
+                />
+              </Button>
+            </Box>
           </FormControl>
 
           <DialogActions>
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleClose} color="primary">
+            <Button onClick={() => createCar()} color="primary">
               Create
             </Button>
           </DialogActions>

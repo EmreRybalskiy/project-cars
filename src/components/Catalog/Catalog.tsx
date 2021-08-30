@@ -1,46 +1,81 @@
-import React, { FC, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import React, {
+  FC,
+  MouseEvent,
+  useEffect,
+  useState,
+} from 'react';
+import { useHistory } from 'react-router-dom';
 
 // Components
-import fetchUsers from 'store/actionCreator/user';
-import { Users } from 'types/user';
-import Loading from '../../UI/Loader';
-import MediaCard from '../MediaCard/MediaCard';
-
-// hook
-import useTypeSelector from '../hooks/useTypeSelector';
-// Styles
-import useStyles from './styles';
+import axios from 'axios';
+// import { Cars } from 'types/cars';
+import Cards from './Cards';
+import Pagination from './Pagination';
 
 const Catalog: FC = () => {
-  const { users, error, loading } = useTypeSelector((state) => state.user);
-  const classes = useStyles();
-  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const [totalCars, setTotalCars] = useState([]);
+  const [cars, setCars] = useState([]);
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
+
+  // const [currentCar, setCurrentCar] = useState<Cars[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [carsPerPage] = useState(5);
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    fetchCars();
   }, []);
 
-  if (loading) {
-    return (
-      <>
-        <Loading />
-      </>
-    );
-  }
-  if (error) {
-    return <p>Error</p>;
-  }
+  useEffect(() => {
+    fetchPaginateCars();
+  }, [currentPage]);
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: 'http://localhost:3000/cars',
+      });
+      setTotalCars(response.data);
+      setLoading(false);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  const fetchPaginateCars = async () => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:3000/cars?_page=${currentPage}&_limit=${carsPerPage}`,
+      });
+      history.push(`cars?_page=${currentPage}&_limit=${carsPerPage}`);
+      setCars(response.data);
+      setLoading(false);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  const paginate = (event: MouseEvent<HTMLElement>) : void => {
+    if (event.currentTarget.textContent !== null) {
+      const currentPage = +event.currentTarget.textContent;
+      setCurrentPage(currentPage);
+    }
+  };
+
   return (
-    <div className={classes.holder}>
-      {users.map((user: Users) => (
-        <MediaCard
-          key={user.id}
-          userName={user.name}
-          company={user.company.name}
-          email={user.email}
-        />
-      ))}
+    <div>
+      <Cards cars={cars} loading={loading} error={error} />
+      <Pagination
+        carsPerPage={carsPerPage}
+        totalCars={totalCars}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
