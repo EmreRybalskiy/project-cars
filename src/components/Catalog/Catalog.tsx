@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import Cards from './Cards';
 import Pagination from './Pagination';
+import FilterCars from './FilterCars';
 
 const Catalog: FC = () => {
   const history = useHistory();
@@ -22,7 +23,6 @@ const Catalog: FC = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [carsPerPage] = useState(5);
-
   useEffect(() => {
     fetchCars();
   }, []);
@@ -50,7 +50,6 @@ const Catalog: FC = () => {
         method: 'get',
         url: `http://localhost:3000/cars?_page=${currentPage}&_limit=${carsPerPage}`,
       });
-      history.push(`cars?_page=${currentPage}&_limit=${carsPerPage}`);
       setCars(response.data);
       setLoading(false);
     } catch (e) {
@@ -61,12 +60,14 @@ const Catalog: FC = () => {
   const paginate = (event: MouseEvent<HTMLElement>) : void => {
     if (event.currentTarget.textContent !== null) {
       const currentPage = +event.currentTarget.textContent;
+      history.push(`cars?_page=${currentPage}&_limit=${carsPerPage}`);
       setCurrentPage(currentPage);
     }
   };
 
   return (
     <div>
+      <FilterCars />
       <Cards cars={cars} loading={loading} error={error} />
       <Pagination
         carsPerPage={carsPerPage}
