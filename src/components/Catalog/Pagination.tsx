@@ -8,7 +8,7 @@ interface PaginationProps {
     currentPage: number;
     paginate: (event: MouseEvent<HTMLElement>) => void
 }
-
+// paginate
 const Pagination: FC<PaginationProps> = ({
   carsPerPage, totalCars, currentPage, paginate,
 }: PaginationProps) => {
