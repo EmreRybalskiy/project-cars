@@ -3,13 +3,10 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
 // MaterialUI
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import { Container } from '@material-ui/core';
-import IconButton from '@material-ui/core/IconButton';
 // Components
 import Loader from 'UI/Loader';
 import { Cars } from 'types/cars';
@@ -54,13 +51,6 @@ const Editor: FC = () => {
 
   return (
     <Container>
-      <NavLink to="/">
-        <IconButton className={classes.iconBackPosition}>
-          <KeyboardBackspaceIcon
-            className={`${classes.icon} ${classes.iconBack}`}
-          />
-        </IconButton>
-      </NavLink>
       <CreateMediaCard />
       <div className={classes.holderCards}>
         {data.map((car: Cars) => (
