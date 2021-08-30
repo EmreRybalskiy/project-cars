@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom';
 
 // Components
 import axios from 'axios';
-// import { Cars } from 'types/cars';
 import Cards from './Cards';
 import Pagination from './Pagination';
 
