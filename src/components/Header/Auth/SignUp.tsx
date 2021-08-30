@@ -12,9 +12,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { FormControl } from '@material-ui/core';
-import fetchUsers from 'store/actionCreator/user';
-import { useDispatch } from 'react-redux';
-
 // styles
 import { Users } from 'types/user';
 import { emailValidation, passwordValidation } from './validation';
@@ -22,7 +19,6 @@ import useStyles from './styles';
 
 const SignUp: FC = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const [open, setOpen] = useState<boolean>(false);
 
   const [userName, setName] = useState<string>('');
@@ -82,7 +78,6 @@ const SignUp: FC = () => {
   };
 
   const checkOnValidation = () => {
-    dispatch(fetchUsers());
     if (emailError === false && nameError === false && passwordError === false) {
       setData();
     }
@@ -92,7 +87,6 @@ const SignUp: FC = () => {
   const setData = async () => {
     try {
       await axios.post('http://localhost:3000/register', newUser);
-      dispatch(fetchUsers());
     } catch (e) {
       throw Error(e);
     }

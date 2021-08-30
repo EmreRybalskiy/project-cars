@@ -12,7 +12,8 @@ export interface Cars {
 export interface CardState {
     cars: Cars[],
     loading: boolean,
-    error: null | string
+    error: null | string,
+    paginate: Cars[]
 }
 
 export type GenericCarImage = {

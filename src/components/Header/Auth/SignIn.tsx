@@ -1,10 +1,7 @@
 import React, {
-  ChangeEvent, FC, useState, useEffect,
+  ChangeEvent, FC, useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
 import axios from 'axios';
-import fetchUsers from 'store/actionCreator/user';
-
 // Material UI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -17,16 +14,12 @@ import {
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 // import { Users } from 'types/user';
-import useTypeSelector from 'components/hooks/useTypeSelector';
 // styles
 import { NavLink } from 'react-router-dom';
 import useStyles from './styles';
 
 const SignIn: FC = () => {
   const classes = useStyles();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { users } = useTypeSelector((state) => state.users);
-  const dispatch = useDispatch();
 
   const [userName, setUserName] = useState<string>('');
   const [userEmail, setEmail] = useState<string>('');
@@ -43,10 +36,6 @@ const SignIn: FC = () => {
     setEmail('');
     setPassword('');
   };
-
-  useEffect(() => {
-    dispatch(fetchUsers());
-  }, []);
 
   const emailHandler = ({ target } : ChangeEvent<HTMLInputElement>): void => {
     setEmail(target.value);
@@ -107,7 +96,7 @@ const SignIn: FC = () => {
 
   function setAuthorizationToken(token: string): void {
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+      axios.defaults.headers.common.Authorization = `Bearer ${token}`;
     } else {
       delete axios.defaults.headers.common.Authorization;
     }
@@ -158,7 +147,7 @@ const SignIn: FC = () => {
         </IconButton>
       </>
       )}
-      <Button onClick={handleClickOpemSignIn}><NavLink to="/signin" className={classes.navItem}>{userName ? `${userName}` : 'Sign in'}</NavLink></Button>
+      <Button onClick={handleClickOpemSignIn} className={classes.navItem}>{userName ? `${userName}` : 'Sign in'}</Button>
       <Dialog
         open={isDialogOpen}
         onClose={handleClickCloseSignIn}

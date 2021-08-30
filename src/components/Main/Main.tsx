@@ -15,7 +15,7 @@ const Main: FC = () => {
   return (
     <main className={classes.main}>
       <Switch>
-        <Route exact path="/" component={Catalog} />
+        <Route exact path="/cars" component={Catalog} />
         <Route path="/editor" component={Editor} />
         <Route path="/favorites" component={Favorites} />
         <Route path="/car/:carId" component={MediaPage} />

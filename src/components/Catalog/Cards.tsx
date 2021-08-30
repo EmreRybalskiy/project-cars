@@ -4,15 +4,14 @@ import Loading from '../../UI/Loader';
 import useStyles from './styles';
 import MediaCard from '../MediaCard/MediaCard';
 
-interface OurCarsProps {
+interface CardsProps {
   cars: Cars[];
   loading: boolean;
   error: string | null;
 }
 
-const OurCars: FC<OurCarsProps> = ({ cars, loading, error }: OurCarsProps) => {
+const Cards: FC<CardsProps> = ({ cars, loading, error }: CardsProps) => {
   const classes = useStyles();
-
   if (loading) {
     return <h2><Loading /></h2>;
   }
@@ -39,4 +38,4 @@ const OurCars: FC<OurCarsProps> = ({ cars, loading, error }: OurCarsProps) => {
   );
 };
 
-export default OurCars;
+export default Cards;

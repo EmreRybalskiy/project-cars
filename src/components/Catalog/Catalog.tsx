@@ -4,28 +4,61 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import fetchCars from 'store/actionCreator/cars';
 // Components
-import OurCars from './OurCars';
+import axios from 'axios';
+// import { Cars } from 'types/cars';
+import Cards from './Cards';
 import Pagination from './Pagination';
-// hook
-import useTypeSelector from '../hooks/useTypeSelector';
 
 const Catalog: FC = () => {
-  const { cars, loading, error } = useTypeSelector((state) => state.cars);
+  const history = useHistory();
+
+  const [totalCars, setTotalCars] = useState([]);
+  const [cars, setCars] = useState([]);
+
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
+
+  // const [currentCar, setCurrentCar] = useState<Cars[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [carsPerPage] = useState(4);
-  const dispatch = useDispatch();
+  const [carsPerPage] = useState(5);
 
   useEffect(() => {
-    dispatch(fetchCars());
+    fetchCars();
   }, []);
 
-  const indexOFLastCar = currentPage * carsPerPage;
-  const indexOfFirstCar = indexOFLastCar - carsPerPage;
-  const currentCar = cars.slice(indexOfFirstCar, indexOFLastCar);
+  useEffect(() => {
+    fetchPaginateCars();
+  }, [currentPage]);
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: 'http://localhost:3000/cars',
+      });
+      setTotalCars(response.data);
+      setLoading(false);
+    } catch (e) {
+      setError(e);
+    }
+  };
+
+  const fetchPaginateCars = async () => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `http://localhost:3000/cars?_page=${currentPage}&_limit=${carsPerPage}`,
+      });
+      history.push(`cars?_page=${currentPage}&_limit=${carsPerPage}`);
+      setCars(response.data);
+      setLoading(false);
+    } catch (e) {
+      setError(e);
+    }
+  };
 
   const paginate = (event: MouseEvent<HTMLElement>) : void => {
     if (event.currentTarget.textContent !== null) {
@@ -36,10 +69,10 @@ const Catalog: FC = () => {
 
   return (
     <div>
-      <OurCars cars={currentCar} loading={loading} error={error} />
+      <Cards cars={cars} loading={loading} error={error} />
       <Pagination
         carsPerPage={carsPerPage}
-        totalCars={cars}
+        totalCars={totalCars}
         paginate={paginate}
         currentPage={currentPage}
       />

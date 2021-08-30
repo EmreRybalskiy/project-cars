@@ -123,7 +123,7 @@ const MediaCard: FC<CardProps> = ({
       </CardContent>
       {location.pathname === '/favorites' && <Button onClick={() => removeCar(id as number)} color="secondary">Remove from Favorites</Button>}
       <Box className={classes.cardFooter}>
-        {(location.pathname === '/' || location.pathname === '/editor' || location.pathname === '/favorites') ? (
+        {(location.pathname === '/cars' || location.pathname === '/editor' || location.pathname === '/favorites') ? (
           <Link to={{
             pathname: `/car/${id}`,
             state: {
@@ -136,7 +136,7 @@ const MediaCard: FC<CardProps> = ({
             </Button>
           </Link>
         ) : null}
-        {(location.pathname === `/car/${id}` || location.pathname === '/' || location.pathname === '/editor') ? (
+        {(location.pathname === `/car/${id}` || location.pathname === '/cars' || location.pathname === '/editor') ? (
           <>
             <FormControlLabel
               onClick={() => addFavoriteCard(id as number)}

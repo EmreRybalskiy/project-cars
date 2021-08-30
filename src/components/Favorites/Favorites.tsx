@@ -1,23 +1,22 @@
 import axios from 'axios';
 import MediaCard from 'components/MediaCard/MediaCard';
 import React, { FC, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { Cars } from 'types/cars';
 
-import useTypeSelector from 'components/hooks/useTypeSelector';
-import fetchCars from 'store/actionCreator/cars';
 import Loader from 'UI/Loader';
 import useStyles from './styles';
 
 const Favorites: FC = () => {
   const classes = useStyles();
-  const { cars, error, loading } = useTypeSelector((state) => state.cars);
   const [userFavorites, setUserFavorites] = useState<[]>([]);
-  const dispatch = useDispatch();
+
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    dispatch(fetchCars());
     showFavorites();
+    fetchCars();
   }, []);
 
   const showFavorites = async () => {
@@ -31,6 +30,19 @@ const Favorites: FC = () => {
       setUserFavorites(userFav);
     } catch (e) {
       throw Error(e);
+    }
+  };
+
+  const fetchCars = async () => {
+    try {
+      const response = await axios({
+        method: 'get',
+        url: 'http://localhost:3000/cars',
+      });
+      setLoading(false);
+      setData(response.data);
+    } catch (e) {
+      setError(e);
     }
   };
 
@@ -49,7 +61,7 @@ const Favorites: FC = () => {
     <>
       {userFavorites ? (
         <div className={classes.wrapperCars}>
-          {cars.map((car: Cars) => {
+          {data.map((car: Cars) => {
             const a = userFavorites.filter((el) => car.id === el);
             if (car.id === +a) {
               return (

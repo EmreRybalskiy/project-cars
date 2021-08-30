@@ -1,9 +1,10 @@
 import React, {
   FC,
   useEffect,
+  useState,
 } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 // MaterialUI
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
@@ -11,23 +12,33 @@ import { Container } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 // Components
 import Loader from 'UI/Loader';
-import fetchCars from 'store/actionCreator/user';
 import { Cars } from 'types/cars';
 import MediaCard from '../MediaCard/MediaCard';
 import CreateMediaCard from '../CreateMediaCard/CreateMediaCard';
-// hook
-import useTypeSelector from '../hooks/useTypeSelector';
 // styles
 import useStyles from './styles';
 // Types
 
 const Editor: FC = () => {
   const classes = useStyles();
-  const { cars, error, loading } = useTypeSelector((state) => state.cars);
-  const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
-    dispatch(fetchCars());
+    const fetchCars = async () => {
+      try {
+        const response = await axios({
+          method: 'get',
+          url: 'http://localhost:3000/cars',
+        });
+        setLoading(false);
+        setData(response.data);
+      } catch (e) {
+        setError(e);
+      }
+    };
+    fetchCars();
   }, []);
 
   if (loading) {
@@ -52,7 +63,7 @@ const Editor: FC = () => {
       </NavLink>
       <CreateMediaCard />
       <div className={classes.holderCards}>
-        {cars.map((car: Cars) => (
+        {data.map((car: Cars) => (
           <MediaCard
             id={car.id}
             key={car.id}

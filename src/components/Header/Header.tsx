@@ -10,7 +10,6 @@ import {
 // Components
 
 // Styles
-import { NavLink } from 'react-router-dom';
 import useStyles from './styles';
 import SignIn from './Auth/SignIn';
 import SignUp from './Auth/SignUp';
@@ -21,7 +20,7 @@ const Header: FC = () => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.navMenu}>
-        <NavLink to="/" className={classes.navLogo}><Typography variant="h4">Catalog</Typography></NavLink>
+        <Typography variant="h4" className={classes.navLogo}>Catalog</Typography>
         <Box className={classes.authMenu}>
           <SignIn />
           <SignUp />
