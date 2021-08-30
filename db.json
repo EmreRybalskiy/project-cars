@@ -5,8 +5,10 @@
       "password": "$2a$10$6pTd3f4DVb8RL5drhWpj9OMLP1fcQkO49lK3Lwoe90uMnznS9fSLa",
       "name": "Emre",
       "favorites": [
+        2,
         1,
-        3
+        3,
+        6
       ],
       "id": 1,
       "isAdmin": true
