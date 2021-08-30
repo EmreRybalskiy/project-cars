@@ -29,6 +29,5 @@ module.exports = {
     'no-shadow': 0,
     'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 'error',
-    '@typescript-eslint/no-var-requires': 0,
   },
 };

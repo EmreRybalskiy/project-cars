@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { teal, indigo, green } from '@material-ui/core/colors';
+import { teal, indigo } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   holderCards: {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
   holderDialog: {
     width: 600,
-    height: 500,
+    height: 400,
     textAlign: 'center',
   },
   dialogTitle: {
@@ -39,13 +39,6 @@ const useStyles = makeStyles({
   field: {
     marginBottom: 10,
     borderColor: 'yellow !important',
-  },
-  upload: {
-    display: 'flex',
-  },
-  check: {
-    color: green[600],
-    margin: '5px 0 0 10px',
   },
 });
 

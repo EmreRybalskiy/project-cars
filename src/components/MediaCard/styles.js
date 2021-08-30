@@ -3,18 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles({
   card: {
     width: '350px',
-    maxHeight: '450px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
     borderRadius: '10px',
     padding: '0 10px',
     margin: '10px',
     transition: 'box-shadow 0.7s ease',
   },
-  cardContent: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
   media: {
-    height: 150,
+    height: 140,
   },
   icon: {
     cursor: 'pointer',
@@ -22,10 +20,6 @@ const useStyles = makeStyles({
   },
   iconHolder: {
     width: '100%',
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
-  cardFooter: {
     display: 'flex',
     justifyContent: 'space-between',
   },
