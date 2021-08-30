@@ -21,9 +21,7 @@ const Header: FC = () => {
   return (
     <AppBar position="static">
       <Toolbar className={classes.navMenu}>
-        <NavLink to="/cars" className={classes.navLogo}>
-          <Typography variant="h4">Catalog</Typography>
-        </NavLink>
+        <NavLink to="/cars" className={classes.navLogo}><Typography variant="h4">Catalog</Typography></NavLink>
         <Box className={classes.authMenu}>
           <SignIn />
           <SignUp />

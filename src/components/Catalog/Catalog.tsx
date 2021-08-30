@@ -8,7 +8,6 @@ import { useHistory } from 'react-router-dom';
 
 // Components
 import axios from 'axios';
-// import { Cars } from 'types/cars';
 import Cards from './Cards';
 import Pagination from './Pagination';
 
@@ -21,7 +20,6 @@ const Catalog: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
-  // const [currentCar, setCurrentCar] = useState<Cars[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [carsPerPage] = useState(5);
 
