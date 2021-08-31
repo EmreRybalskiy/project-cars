@@ -28,6 +28,7 @@ const Catalog: FC = () => {
   const [carsPerPage] = useState(5);
 
   useEffect(() => {
+    checkUrlParams();
     fetchCars();
   }, []);
 
@@ -48,13 +49,23 @@ const Catalog: FC = () => {
     }
   };
 
+  const checkUrlParams = () => {
+    const regex = /(?<=page=)\d+/;
+    const value = history.location.search.match(regex);
+    if (value != null) {
+      setCurrentPage(+value[0]);
+    }
+  };
+
   const fetchPaginateCars = async () => {
+    const api = 'http://localhost:3000';
+    const currentUrl = `/cars?_page=${currentPage}&_limit=${carsPerPage}`;
+    history.push(currentUrl);
     try {
       const response = await axios({
         method: 'get',
-        url: `http://localhost:3000/cars?_page=${currentPage}&_limit=${carsPerPage}`,
+        url: api + currentUrl,
       });
-      history.push(`cars?_page=${currentPage}&_limit=${carsPerPage}`);
       setCars(response.data);
       setLoading(false);
     } catch (e) {
