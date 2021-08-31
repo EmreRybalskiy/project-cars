@@ -8,12 +8,16 @@ import { useHistory } from 'react-router-dom';
 
 // Components
 import axios from 'axios';
+import { Box, Button } from '@material-ui/core';
 import Cards from './Cards';
 import Pagination from './Pagination';
 import FilterCars from './FilterCars';
+import AppDrawer from './AppDrawer';
+import useStyles from './styles';
 
 const Catalog: FC = () => {
   const history = useHistory();
+  const classes = useStyles();
 
   const [totalCars, setTotalCars] = useState([]);
   const [cars, setCars] = useState([]);
@@ -23,7 +27,13 @@ const Catalog: FC = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
   const [carsPerPage] = useState(5);
+
+  const [isDrawer, setIsDrawer] = useState(false);
+  // filter
+  const [brand, setBrand] = useState<string>('');
+  const [typeCar, setTypeCar] = useState<string>('');
   useEffect(() => {
+    checkUrlParams();
     fetchCars();
   }, []);
 
@@ -44,11 +54,23 @@ const Catalog: FC = () => {
     }
   };
 
+  const checkUrlParams = () => {
+    const regex = /(?<=page=)\d+/;
+    const value = history.location.search.match(regex);
+    if (value != null) {
+      setCurrentPage(+value[0]);
+    }
+  };
+
   const fetchPaginateCars = async () => {
+    const api = 'http://localhost:3000';
+    const currentUrl = `/cars?_page=${currentPage}&_limit=${carsPerPage}${brand && `&brand=${brand}`}${typeCar && `&fuelType=${typeCar}`}`;
+    console.log(currentUrl);
+    history.push(currentUrl);
     try {
       const response = await axios({
         method: 'get',
-        url: `http://localhost:3000/cars?_page=${currentPage}&_limit=${carsPerPage}`,
+        url: api + currentUrl,
       });
       setCars(response.data);
       setLoading(false);
@@ -65,16 +87,46 @@ const Catalog: FC = () => {
     }
   };
 
+  const handleDrawer = () => {
+    setIsDrawer(!isDrawer);
+  };
+
+  const handleAccept = () => {
+    fetchPaginateCars();
+  };
+
+  const handleReset = () => {
+    setBrand('');
+    setTypeCar('');
+    fetchPaginateCars();
+  };
   return (
     <div>
-      <FilterCars />
-      <Cards cars={cars} loading={loading} error={error} />
-      <Pagination
-        carsPerPage={carsPerPage}
-        totalCars={totalCars}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
+      <Box>
+        <AppDrawer
+          isDrawer={isDrawer}
+          typeCar={typeCar}
+          setIsDrawer={setIsDrawer}
+          setTypeCar={setTypeCar}
+          setBrand={setBrand}
+          handleAccept={handleAccept}
+          handleReset={handleReset}
+        />
+        <Box>
+          <Button onClick={handleDrawer} className={classes.filterBtn} variant="contained">Filter</Button>
+        </Box>
+      </Box>
+      <Box>
+        <FilterCars />
+        <Cards cars={cars} loading={loading} error={error} />
+        <Pagination
+          carsPerPage={carsPerPage}
+          totalCars={totalCars}
+          paginate={paginate}
+          currentPage={currentPage}
+
+        />
+      </Box>
     </div>
   );
 };
