@@ -8,11 +8,15 @@ import { useHistory } from 'react-router-dom';
 
 // Components
 import axios from 'axios';
+import { Box } from '@material-ui/core';
 import Cards from './Cards';
 import Pagination from './Pagination';
 
+import useStyles from './styles';
+
 const Catalog: FC = () => {
   const history = useHistory();
+  const classes = useStyles();
 
   const [totalCars, setTotalCars] = useState([]);
   const [cars, setCars] = useState([]);
@@ -24,6 +28,7 @@ const Catalog: FC = () => {
   const [carsPerPage] = useState(5);
 
   useEffect(() => {
+    checkUrlParams();
     fetchCars();
   }, []);
 
@@ -44,13 +49,23 @@ const Catalog: FC = () => {
     }
   };
 
+  const checkUrlParams = () => {
+    const regex = /(?<=page=)\d+/;
+    const value = history.location.search.match(regex);
+    if (value != null) {
+      setCurrentPage(+value[0]);
+    }
+  };
+
   const fetchPaginateCars = async () => {
+    const api = 'http://localhost:3000';
+    const currentUrl = `/cars?_page=${currentPage}&_limit=${carsPerPage}`;
+    history.push(currentUrl);
     try {
       const response = await axios({
         method: 'get',
-        url: `http://localhost:3000/cars?_page=${currentPage}&_limit=${carsPerPage}`,
+        url: api + currentUrl,
       });
-      history.push(`cars?_page=${currentPage}&_limit=${carsPerPage}`);
       setCars(response.data);
       setLoading(false);
     } catch (e) {
@@ -66,14 +81,16 @@ const Catalog: FC = () => {
   };
 
   return (
-    <div>
-      <Cards cars={cars} loading={loading} error={error} />
-      <Pagination
-        carsPerPage={carsPerPage}
-        totalCars={totalCars}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
+    <div className={classes.catalogContainer}>
+      <Box>
+        <Cards cars={cars} loading={loading} error={error} />
+        <Pagination
+          carsPerPage={carsPerPage}
+          totalCars={totalCars}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </Box>
     </div>
   );
 };

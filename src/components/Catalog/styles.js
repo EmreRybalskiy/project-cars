@@ -7,6 +7,9 @@ const useStyles = makeStyles({
     flexFlow: 'row wrap',
     maxWidth: '1200px',
   },
+  catalogContainer: {
+    display: 'flex',
+  },
   paginationWrapper: {
     margin: '20px',
   },
