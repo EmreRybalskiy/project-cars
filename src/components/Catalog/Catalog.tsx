@@ -8,11 +8,15 @@ import { useHistory } from 'react-router-dom';
 
 // Components
 import axios from 'axios';
+import { Box } from '@material-ui/core';
 import Cards from './Cards';
 import Pagination from './Pagination';
 
+import useStyles from './styles';
+
 const Catalog: FC = () => {
   const history = useHistory();
+  const classes = useStyles();
 
   const [totalCars, setTotalCars] = useState([]);
   const [cars, setCars] = useState([]);
@@ -66,14 +70,16 @@ const Catalog: FC = () => {
   };
 
   return (
-    <div>
-      <Cards cars={cars} loading={loading} error={error} />
-      <Pagination
-        carsPerPage={carsPerPage}
-        totalCars={totalCars}
-        paginate={paginate}
-        currentPage={currentPage}
-      />
+    <div className={classes.catalogContainer}>
+      <Box>
+        <Cards cars={cars} loading={loading} error={error} />
+        <Pagination
+          carsPerPage={carsPerPage}
+          totalCars={totalCars}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
+      </Box>
     </div>
   );
 };
