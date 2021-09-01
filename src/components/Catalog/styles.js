@@ -1,7 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { teal, grey } from '@material-ui/core/colors';
+import { teal } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
+  catalogWrapper: {
+    marginTop: '50px',
+  },
   holder: {
     display: 'flex',
     flexFlow: 'row wrap',
@@ -29,9 +32,10 @@ const useStyles = makeStyles({
     color: teal[100],
   },
   filterBtn: {
-    textDecoration: 'none',
-    color: grey[200],
-    backgroundColor: teal[400],
+    color: teal[400],
+    position: 'absolute',
+    top: '75px',
+    left: '100px',
   },
   drawer: {
     maxWidth: '400px',
