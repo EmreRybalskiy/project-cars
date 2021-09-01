@@ -42,14 +42,14 @@ const Catalog: FC = () => {
 
   useEffect(() => {
     checkUrlParams();
-    fetchCars();
+    fetchTotalCars();
   }, []);
 
   useEffect(() => {
     fetchPaginateCars();
-  }, [currentPage, brand, typeCar, date, specificDate]);
+  }, [currentPage, brand, typeCar, date.dateValue, specificDate.dateValue]);
 
-  const fetchCars = async () => {
+  const fetchTotalCars = async () => {
     try {
       const response = await axios({
         method: 'get',
@@ -61,7 +61,7 @@ const Catalog: FC = () => {
       setError(e);
     }
   };
-  console.log(totalCars);
+  // console.log('TOTAL CARS: ', totalCars);
 
   const checkUrlParams = () => {
     const regex = /(?<=page=)\d+/;
@@ -72,13 +72,23 @@ const Catalog: FC = () => {
   };
   const fetchPaginateCars = async () => {
     const api = 'http://localhost:3000';
-    const currentUrl = `/cars?_page=${currentPage}&_limit=${carsPerPage}${brand && `&brand=${brand}`}${typeCar && `&fuelType=${typeCar}`}${date.dateValue && `&_sort=date&_order=${date.dateValue}`}`;
+    const pagination = `/cars?_page=${currentPage}&_limit=${carsPerPage}`;
+    const filterParams = `${brand && `&brand=${brand}`}${typeCar && `&fuelType=${typeCar}`}${date.dateValue && `&_sort=date&_order=${date.dateValue}`}`;
+    const currentUrl = pagination + filterParams;
     history.push(currentUrl);
     try {
       const response = await axios({
         method: 'get',
         url: api + currentUrl,
       });
+      const responseTotal = await axios({
+        method: 'get',
+        url: `${api}/cars?${filterParams}`,
+      });
+
+      if (brand || typeCar || date.dateValue) {
+        setTotalCars(responseTotal.data);
+      }
       if (specificDate.dateValue) {
         const responseSpecificDate = response.data
           .filter((item: Cars) => item.date?.substr(0, 10) === specificDate.dateValue);
@@ -123,7 +133,7 @@ const Catalog: FC = () => {
     });
   };
 
-  console.log('cars', cars);
+  // console.log('CARS', cars);
 
   return (
     <div className={classes.catalogWrapper}>
