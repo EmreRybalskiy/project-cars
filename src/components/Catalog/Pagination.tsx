@@ -15,7 +15,6 @@ const Pagination: FC<PaginationProps> = ({
   const classes = useStyles();
 
   const pageNumbers = [];
-  // console.log('TotalCars', totalCars);
 
   for (let i = 1; i <= Math.ceil(totalCars.length / carsPerPage); i += 1) {
     pageNumbers.push(i);

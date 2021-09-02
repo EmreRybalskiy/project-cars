@@ -43,7 +43,7 @@ const AppDrawer: FC<AppDrawerProps> = ({
         </ListItem>
         <ListItem>
           <FormControl className={classes.itemHolder}>
-            <InputLabel id="demo-simple-select-label">Type Transmission</InputLabel>
+            <InputLabel id="demo-simple-select-label">Type Fuel</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"

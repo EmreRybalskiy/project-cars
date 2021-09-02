@@ -10,7 +10,6 @@ import { useHistory } from 'react-router-dom';
 // Components
 import axios from 'axios';
 import { Box, Button } from '@material-ui/core';
-import { Cars } from 'types/cars';
 import Cards from './Cards';
 import Pagination from './Pagination';
 import AppDrawer from './AppDrawer';
@@ -36,32 +35,27 @@ const Catalog: FC = () => {
   const [date, setDate] = useState({
     dateValue: '',
   });
-  const [specificDate, setSpecificDate] = useState({
+  const [calendarDate, setCalendarDate] = useState({
     dateValue: '',
   });
 
   useEffect(() => {
     checkUrlParams();
-    fetchTotalCars();
+    fetchCars();
   }, []);
 
   useEffect(() => {
-    fetchPaginateCars();
-  }, [currentPage, brand, typeCar, date.dateValue, specificDate.dateValue]);
+    fetchCars();
+  }, [currentPage, brand, typeCar, date.dateValue]);
 
-  const fetchTotalCars = async () => {
-    try {
-      const response = await axios({
-        method: 'get',
-        url: 'http://localhost:3000/cars',
-      });
-      setTotalCars(response.data);
-      setLoading(false);
-    } catch (e) {
-      setError(e);
-    }
-  };
-  // console.log('TOTAL CARS: ', totalCars);
+  useEffect(() => {
+    fetchCarsByDate();
+  }, [calendarDate.dateValue]);
+
+  const api = 'http://localhost:3000';
+  const pagination = `/cars?_page=${currentPage}&_limit=${carsPerPage}`;
+  const filterParams = `${brand && `&brand=${brand}`}${typeCar && `&fuelType=${typeCar}`}${date.dateValue && `&_sort=date&_order=${date.dateValue}`}`;
+  const currentUrl = pagination + filterParams;
 
   const checkUrlParams = () => {
     const regex = /(?<=page=)\d+/;
@@ -70,38 +64,52 @@ const Catalog: FC = () => {
       setCurrentPage(+value[0]);
     }
   };
-  const fetchPaginateCars = async () => {
-    const api = 'http://localhost:3000';
-    const pagination = `/cars?_page=${currentPage}&_limit=${carsPerPage}`;
-    const filterParams = `${brand && `&brand=${brand}`}${typeCar && `&fuelType=${typeCar}`}${date.dateValue && `&_sort=date&_order=${date.dateValue}`}`;
-    const currentUrl = pagination + filterParams;
+
+  const fetchCars = async () => {
     history.push(currentUrl);
     try {
       const response = await axios({
         method: 'get',
         url: api + currentUrl,
       });
-      const responseTotal = await axios({
+      const responseFilter = await axios({
         method: 'get',
         url: `${api}/cars?${filterParams}`,
       });
 
-      if (brand || typeCar || date.dateValue) {
-        setTotalCars(responseTotal.data);
-      }
-      if (specificDate.dateValue) {
-        const responseSpecificDate = response.data
-          .filter((item: Cars) => item.date?.substr(0, 10) === specificDate.dateValue);
-        setCars(responseSpecificDate);
-      } else {
-        setCars(response.data);
-      }
+      console.log(response.data);
+      console.log(responseFilter.data);
+      setTotalCars(responseFilter.data);
+      setCars(response.data);
+
       setLoading(false);
     } catch (e) {
       setError(e);
     }
   };
 
+  const fetchCarsByDate = async () => {
+    history.push(currentUrl);
+    try {
+      const response = await axios({
+        method: 'get',
+        url: `${api}${pagination}`,
+      });
+      const responseFilter = await axios({
+        method: 'get',
+        url: `${api}/cars?date=${calendarDate.dateValue}`,
+      });
+      if (responseFilter.data.length !== 0) {
+        setTotalCars(responseFilter.data);
+      } else {
+        fetchCars();
+      }
+      setCars(response.data);
+      setLoading(false);
+    } catch (e) {
+      setError(e);
+    }
+  };
   const paginate = (event: MouseEvent<HTMLElement>) : void => {
     if (event.currentTarget.textContent !== null) {
       const currentPage = +event.currentTarget.textContent;
@@ -117,8 +125,9 @@ const Catalog: FC = () => {
   const handleReset = () => {
     setBrand('');
     setTypeCar('');
-    setSpecificDate({ dateValue: '' });
+    setCalendarDate({ dateValue: '' });
     setDate({ dateValue: '' });
+    fetchCars();
   };
 
   const handleSortDate = (event: MouseEvent<HTMLButtonElement>) => {
@@ -128,12 +137,10 @@ const Catalog: FC = () => {
   };
 
   const handleChangeDate = (event : ChangeEvent<HTMLInputElement>) => {
-    setSpecificDate({
+    setCalendarDate({
       dateValue: event.target.value,
     });
   };
-
-  // console.log('CARS', cars);
 
   return (
     <div className={classes.catalogWrapper}>

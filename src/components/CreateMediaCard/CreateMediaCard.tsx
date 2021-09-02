@@ -26,9 +26,7 @@ import useStyles from './styles';
 const getDate = () => {
   const today = new Date();
   const date = today.toISOString().split('T')[0];
-  const time = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-  const currentDate = `${date} ${time}`;
-  return currentDate;
+  return date;
 };
 
 const CreateMediaCard: FC = () => {
