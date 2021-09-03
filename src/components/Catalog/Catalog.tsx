@@ -42,6 +42,7 @@ const Catalog: FC = () => {
   const [calendarDate, setCalendarDate] = useState({
     dateValue: '',
   });
+  // console.log(currentPage);
 
   useEffect(() => {
     checkUrlParams();
@@ -65,12 +66,12 @@ const Catalog: FC = () => {
     const regex = /(?<=page=)\d+/;
     const value = history.location.search.match(regex);
     if (value != null) {
+      console.log('Take VALUE: ', +value[0]);
       setCurrentPage(+value[0]);
     }
   };
 
   const fetchCars = async () => {
-    history.push(currentUrl);
     try {
       const response = await axios({
         method: 'get',
@@ -80,14 +81,12 @@ const Catalog: FC = () => {
         method: 'get',
         url: `${api}/cars?${filterParams}`,
       });
-
       setTotalCars(responseFilter.data);
       setCars(response.data);
-
-      setLoading(false);
     } catch (e) {
       setError(e);
     }
+    setLoading(false);
   };
 
   const fetchCarsByDate = async () => {

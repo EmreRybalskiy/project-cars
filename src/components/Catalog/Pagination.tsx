@@ -12,7 +12,7 @@ interface PaginationProps {
     currentPage: number;
     paginate: (event: string) => void
 }
-
+// paginate
 const Pagination: FC<PaginationProps> = ({
   carsPerPage, totalCars, currentPage, paginate,
 }: PaginationProps) => {
