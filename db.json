@@ -76,6 +76,50 @@
       "transmission": "Manual",
       "date": "2021-09-02",
       "id": 5
+    },
+    {
+      "image": "blob:http://localhost:3001/69620130-9574-4fdc-88ac-3cf4932f6619",
+      "brand": "Porche",
+      "color": "Red",
+      "year": "2018",
+      "engineType": "2.2",
+      "fuelType": "Diesel",
+      "transmission": "Manual",
+      "date": "2021-09-03",
+      "id": 6
+    },
+    {
+      "image": "blob:http://localhost:3001/1c3f46ab-70de-425a-a208-cc0ad78d3227",
+      "brand": "Acura",
+      "color": "Grey",
+      "year": "2021",
+      "engineType": "2.2",
+      "fuelType": "Petrol",
+      "transmission": "Automatic",
+      "date": "2021-09-03",
+      "id": 7
+    },
+    {
+      "image": "blob:http://localhost:3001/19f46443-14b7-48e9-8b8f-c60c01cd365a",
+      "brand": "Ferrari",
+      "color": "Red",
+      "year": "2010",
+      "engineType": "1.8",
+      "fuelType": "Diesel",
+      "transmission": "Automatic",
+      "date": "2021-09-03",
+      "id": 8
+    },
+    {
+      "image": "blob:http://localhost:3001/ef92894c-08ca-4222-ad79-bd7b762edea6",
+      "brand": "McLaren",
+      "color": "Black",
+      "year": "2015",
+      "engineType": "2.9",
+      "fuelType": "Diesel",
+      "transmission": "Automatic",
+      "date": "2021-09-03",
+      "id": 9
     }
   ]
 }

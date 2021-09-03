@@ -23,7 +23,7 @@ import Dialog from '@material-ui/core/Dialog';
 // styles
 import useStyles from './styles';
 
-const getDate = () => {
+export const getDate = () => {
   const today = new Date();
   const date = today.toISOString().split('T')[0];
   return date;

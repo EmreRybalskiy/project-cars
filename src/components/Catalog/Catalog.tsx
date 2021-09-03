@@ -6,30 +6,34 @@ import React, {
   ChangeEvent,
 } from 'react';
 import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+
+// Material UI
+import { Box, Button } from '@material-ui/core';
 
 // Components
-import axios from 'axios';
-import { Box, Button } from '@material-ui/core';
 import Cards from './Cards';
 import Pagination from './Pagination';
 import AppDrawer from './AppDrawer';
+
+// styles
 import useStyles from './styles';
 
 const Catalog: FC = () => {
   const history = useHistory();
   const classes = useStyles();
 
-  const [totalCars, setTotalCars] = useState([]);
-  const [cars, setCars] = useState([]);
+  const [totalCars, setTotalCars] = useState<[]>([]);
+  const [cars, setCars] = useState<[]>([]);
 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [carsPerPage] = useState(2);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [carsPerPage] = useState<number>(2);
 
-  const [isDrawer, setIsDrawer] = useState(false);
-  // filter
+  const [isDrawer, setIsDrawer] = useState<boolean>(false);
+
   const [brand, setBrand] = useState<string>('');
   const [typeCar, setTypeCar] = useState<string>('');
   const [date, setDate] = useState({
@@ -50,7 +54,7 @@ const Catalog: FC = () => {
 
   useEffect(() => {
     fetchCarsByDate();
-  }, [calendarDate.dateValue]);
+  }, [currentPage, calendarDate.dateValue]);
 
   const api = 'http://localhost:3000';
   const pagination = `/cars?_page=${currentPage}&_limit=${carsPerPage}`;
@@ -77,8 +81,6 @@ const Catalog: FC = () => {
         url: `${api}/cars?${filterParams}`,
       });
 
-      console.log(response.data);
-      console.log(responseFilter.data);
       setTotalCars(responseFilter.data);
       setCars(response.data);
 
@@ -89,30 +91,32 @@ const Catalog: FC = () => {
   };
 
   const fetchCarsByDate = async () => {
-    history.push(currentUrl);
     try {
       const response = await axios({
         method: 'get',
-        url: `${api}${pagination}`,
+        url: `${api}/cars?date=${calendarDate.dateValue}&_page=${currentPage}&_limit=${carsPerPage}`,
       });
       const responseFilter = await axios({
         method: 'get',
         url: `${api}/cars?date=${calendarDate.dateValue}`,
       });
+
       if (responseFilter.data.length !== 0) {
         setTotalCars(responseFilter.data);
+        setCars(response.data);
       } else {
         fetchCars();
       }
-      setCars(response.data);
+
       setLoading(false);
     } catch (e) {
       setError(e);
     }
   };
-  const paginate = (event: MouseEvent<HTMLElement>) : void => {
-    if (event.currentTarget.textContent !== null) {
-      const currentPage = +event.currentTarget.textContent;
+
+  const paginate = (event: string) : void => {
+    if (event !== null) {
+      const currentPage = +event;
       history.push(`cars?_page=${currentPage}&_limit=${carsPerPage}`);
       setCurrentPage(currentPage);
     }
@@ -164,7 +168,6 @@ const Catalog: FC = () => {
           totalCars={totalCars}
           paginate={paginate}
           currentPage={currentPage}
-
         />
       </Box>
     </div>

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { teal } from '@material-ui/core/colors';
+import { teal, red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
   catalogWrapper: {
@@ -54,6 +54,9 @@ const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'flex-end',
     marginRight: 20,
+  },
+  notFound: {
+    color: red[500],
   },
 });
 

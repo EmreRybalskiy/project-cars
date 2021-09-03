@@ -1,12 +1,16 @@
-import React, { FC, MouseEvent } from 'react';
+import React, { FC } from 'react';
+
+// types
 import { Cars } from 'types/cars';
+
+// styles
 import useStyles from './styles';
 
 interface PaginationProps {
     carsPerPage: number;
     totalCars: Cars[];
     currentPage: number;
-    paginate: (event: MouseEvent<HTMLElement>) => void
+    paginate: (event: string) => void
 }
 
 const Pagination: FC<PaginationProps> = ({
@@ -24,11 +28,10 @@ const Pagination: FC<PaginationProps> = ({
     <div className={classes.paginationWrapper}>
       <ul className={classes.paginationList}>
         {pageNumbers.map((number) => (
-          /* eslint-disable jsx-a11y/click-events-have-key-events,
-            jsx-a11y/no-noninteractive-element-interactions */
           <li
+            role="presentation"
             key={number}
-            onClick={(event) => paginate(event as any)}
+            onClick={(event) => paginate(event.currentTarget.textContent as string)}
             className={`${classes.paginationItem} + ${number === currentPage && classes.paginationItemActive}`}
           >
             {number}

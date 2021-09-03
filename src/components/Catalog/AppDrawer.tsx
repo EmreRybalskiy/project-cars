@@ -1,4 +1,6 @@
 import React, { ChangeEvent, FC, MouseEvent } from 'react';
+
+// Material UI
 import Drawer from '@material-ui/core/Drawer/Drawer';
 import TextField from '@material-ui/core/TextField';
 import {
@@ -9,6 +11,11 @@ import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button/Button';
+
+// Components
+import { getDate } from 'components/CreateMediaCard/CreateMediaCard';
+
+// styles
 import useStyles from './styles';
 
 interface AppDrawerProps {
@@ -59,6 +66,7 @@ const AppDrawer: FC<AppDrawerProps> = ({
           <TextField
             id="date"
             type="date"
+            defaultValue={getDate()}
             className={classes.itemHolder}
             onChange={handleChangeDate}
           />
