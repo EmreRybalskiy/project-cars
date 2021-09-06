@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
+// Material UI
+import { Cars } from 'types/cars';
+import MediaCard from '../MediaCard/MediaCard';
+
+// Comonents
+import Loading from '../../UI/Loader';
 
 // types
-import { Cars } from 'types/cars';
-
-// Components
-import Loading from '../../UI/Loader';
-import MediaCard from '../MediaCard/MediaCard';
 
 // styles
 import useStyles from './styles';

@@ -2,6 +2,8 @@ import React, {
   ChangeEvent, FC, useState,
 } from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
+
 // Material UI
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -13,9 +15,8 @@ import {
   FormControl, IconButton, Menu, MenuItem,
 } from '@material-ui/core';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-// import { Users } from 'types/user';
+
 // styles
-import { NavLink } from 'react-router-dom';
 import useStyles from './styles';
 
 const SignIn: FC = () => {
@@ -75,8 +76,7 @@ const SignIn: FC = () => {
     try {
       const response = await axios.post('http://localhost:3000/login', { email: userEmail, password: userPassword });
       setUserName(response.data.user.name);
-      setIsLoggin(true);
-      if (response.data.user.isAdmin !== undefined) {
+      if (response.data.user.userId !== undefined) {
         setIsAdmin(true);
       } else {
         setIsAdmin(false);
@@ -86,6 +86,7 @@ const SignIn: FC = () => {
       localStorage.setItem('token', JSON.stringify(token));
       localStorage.setItem('userID', JSON.stringify(userId));
       setAuthorizationToken(token);
+      setIsLoggin(true);
     } catch (e) {
       setIsLoggin(false);
       throw Error(e);
@@ -117,10 +118,10 @@ const SignIn: FC = () => {
         >
           {isAdmin && (
           <NavLink
-            to="/editor"
+            to="/create"
             className={classes.link}
           >
-            <MenuItem onClick={closeMenu}>Editor</MenuItem>
+            <MenuItem onClick={closeMenu}>Create</MenuItem>
           </NavLink>
           )}
           <NavLink

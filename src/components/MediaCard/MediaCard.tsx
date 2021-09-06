@@ -7,7 +7,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -36,14 +35,14 @@ const addFavoriteCard = async (id: number) => {
   try {
     const getUser = await axios({
       method: 'get',
-      url: `http://localhost:3000/users/${userID}`,
+      url: `http://localhost:3000/600/users/${userID}`,
     });
     const { favorites } = getUser.data;
     const setNewFavorites = [...favorites, id];
     const uniqueArray = setNewFavorites.filter((item: number, pos: number) => (
       setNewFavorites.indexOf(item) === pos
     ));
-    await axios.patch(`http://localhost:3000/users/${userID}`, {
+    await axios.patch(`http://localhost:3000/600/users/${userID}`, {
       favorites: [...uniqueArray],
     }, {
       headers: {
@@ -61,13 +60,26 @@ const removeCar = async (id: number) => {
   try {
     const getUser = await axios({
       method: 'get',
-      url: `http://localhost:3000/users/${userID}`,
+      url: `http://localhost:3000/600/users/${userID}`,
     });
     const { favorites } = getUser.data;
     const deletedFavoriteCar = favorites.filter((item: number) => item !== id);
-    await axios.patch(`http://localhost:3000/users/${userID}`, {
+    await axios.patch(`http://localhost:3000/600/users/${userID}`, {
       favorites: [...deletedFavoriteCar],
     }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (e) {
+    throw Error(e);
+  }
+};
+
+const deleteCard = async (id?: number) => {
+  const token = JSON.parse(localStorage.getItem('token') as string);
+  try {
+    await axios.delete(`http://localhost:3000/640/cars/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -122,8 +134,8 @@ const MediaCard: FC<CardProps> = ({
         )}
       </CardContent>
       {location.pathname === '/favorites' && <Button onClick={() => removeCar(id as number)} color="secondary">Remove from Favorites</Button>}
-      <Box className={classes.cardFooter}>
-        {(location.pathname === '/cars' || location.pathname === '/editor' || location.pathname === '/favorites') ? (
+      {(location.pathname === '/cars' || location.pathname === '/create' || location.pathname === '/favorites') ? (
+        <Box>
           <Link to={{
             pathname: `/car/${id}`,
             state: {
@@ -135,8 +147,10 @@ const MediaCard: FC<CardProps> = ({
               Learn More
             </Button>
           </Link>
-        ) : null}
-        {(location.pathname === `/car/${id}` || location.pathname === '/cars' || location.pathname === '/editor') ? (
+        </Box>
+      ) : null}
+      <Box className={classes.iconHolder}>
+        {(location.pathname === `/car/${id}` || location.pathname === '/cars') ? (
           <>
             <FormControlLabel
               onClick={() => addFavoriteCard(id as number)}
@@ -145,14 +159,13 @@ const MediaCard: FC<CardProps> = ({
             />
           </>
         ) : null}
-      </Box>
-      {location.pathname === '/editor' && (
-        <CardActions className={classes.iconHolder}>
-          <IconButton className={classes.icon}>
-            <DeleteIcon color="secondary" className={classes.icon} />
-          </IconButton>
+        {(location.pathname === '/cars' || location.pathname === `/car/${id}`)
+        && (
+        <CardActions className={classes.card}>
+          <DeleteIcon color="secondary" className={classes.icon} onClick={() => deleteCard(id as number)} />
         </CardActions>
-      )}
+        )}
+      </Box>
     </Card>
   );
 };

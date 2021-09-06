@@ -104,7 +104,7 @@ const SignUp: FC = () => {
       >
         <DialogTitle className={classes.dialogTitle}>Register</DialogTitle>
         <FormControl className={classes.formControl}>
-          { nameError && <div className={classes.notValidField}>name not correct</div>}
+          { nameError && <div className={classes.notValidField}>Name not correct</div>}
           <TextField
             autoFocus
             label="Name"
@@ -113,9 +113,8 @@ const SignUp: FC = () => {
             className={classes.field}
             value={userName}
             onChange={nameHandler}
-
           />
-          {emailError && <div className={classes.notValidField}>email not correct</div>}
+          {emailError && <div className={classes.notValidField}>Email not correct</div>}
           <TextField
             autoFocus
             label="Email"
@@ -124,10 +123,8 @@ const SignUp: FC = () => {
             className={classes.field}
             value={userEmail}
             onChange={emailHandler}
-
           />
-          {passwordError && <div className={classes.notValidField}>password not correct</div>}
-
+          {passwordError && <div className={classes.notValidField}>Password not correct</div>}
           <TextField
             autoFocus
             label="Password"
@@ -136,10 +133,8 @@ const SignUp: FC = () => {
             className={classes.field}
             value={userPassword}
             onChange={passwordHandler}
-
           />
         </FormControl>
-
         <DialogActions className={classes.formFooter}>
           <NavLink to="/" onClick={handleClickClose} className={classes.navBtnBack}>Go back</NavLink>
           <Button onClick={() => checkOnValidation()} color="primary">

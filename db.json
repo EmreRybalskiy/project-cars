@@ -2,124 +2,45 @@
   "users": [
     {
       "email": "Emre12345@mail.ru",
-      "password": "$2a$10$6pTd3f4DVb8RL5drhWpj9OMLP1fcQkO49lK3Lwoe90uMnznS9fSLa",
+      "password": "$2a$10$NnSAYZ9uCzehI47gTnT4Uu5lhn2I7Gfmy57wJBXDUNDpYp/0EgL2i",
       "name": "Emre",
-      "favorites": [
-        1
-      ],
+      "favorites": [],
       "id": 1,
-      "isAdmin": true
+      "userId": 1
     },
     {
-      "email": "Dima12345@mail.ru",
-      "password": "$2a$10$k0DUc52uCS6cID2Tw5JhEe.WdV6bbFPMvfceumD6Kmvlq9GwytqKy",
-      "name": "Dima",
-      "favorites": [
-        3,
-        1
-      ],
-      "id": 2
+      "email": "James12345@mail.ru",
+      "password": "$2a$10$dhoj76DI/C3Illqt9p81IO.xrLEMDuycEiWWPEppUuw8JWYg0wJEC",
+      "name": "James",
+      "favorites": [],
+      "id": 2,
+      "test": "2"
+    },
+    {
+      "email": "Andrey12345@mail.ru",
+      "password": "$2a$10$3746yQJlqSjM01Ix6Ct5Oeigk5L6UB6vw5/B33K/E6ajcYDM51G4W",
+      "name": "Andrey",
+      "favorites": [],
+      "id": 3,
+      "test": "2"
+    },
+    {
+      "email": "easda@mail.rr",
+      "password": "$2a$10$o6P7W70ab2ZjPLfbipGqXeKwmE0ltXDLv40cuNnUVfB5mtd7Wfck2",
+      "id": 4
     }
   ],
   "cars": [
     {
-      "image": "blob:http://localhost:3001/42a659fe-ee11-420e-b581-37e7f9280458",
-      "brand": "Mazda",
-      "color": "Red",
-      "year": "2012",
-      "engineType": "2",
-      "fuelType": "Diesel",
-      "transmission": "Manual",
-      "date": "2021-09-01",
-      "id": 1
-    },
-    {
-      "image": "blob:http://localhost:3001/1fdfaa2c-d5ba-42d0-aca6-edade021852b",
-      "brand": "Toyota",
-      "color": "Yellow",
-      "year": "1",
-      "engineType": "2",
-      "fuelType": "Diesel",
-      "transmission": "Manual",
-      "date": "2021-09-01",
-      "id": 2
-    },
-    {
-      "image": "blob:http://localhost:3001/c022cb83-e067-4985-b79d-0bd4d2ce5207",
-      "brand": "Chevrolet",
-      "color": "Red",
-      "year": "1",
-      "engineType": "1",
-      "fuelType": "Petrol",
-      "transmission": "1",
-      "date": "2021-09-02",
+      "image": "blob:http://localhost:3001/256bc30e-9788-4ebc-aa89-dfa11c2146c4",
+      "brand": "3",
+      "color": "3",
+      "year": "3",
+      "engineType": "3",
+      "fuelType": "3",
+      "transmission": "3",
+      "userId": 1,
       "id": 3
-    },
-    {
-      "image": "blob:http://localhost:3001/d950d79d-61cc-4c30-ade4-edeafb5ac717",
-      "brand": "Lotus",
-      "color": "Blue",
-      "year": "2",
-      "engineType": "2",
-      "fuelType": "Diesel",
-      "transmission": "a",
-      "date": "2021-09-02",
-      "id": 4
-    },
-    {
-      "image": "blob:http://localhost:3001/58ee9bfa-f7a6-4008-aed9-1576eaadd5bf",
-      "brand": "Huinday",
-      "color": "White",
-      "year": "12312",
-      "engineType": "1",
-      "fuelType": "Petrol",
-      "transmission": "Manual",
-      "date": "2021-09-02",
-      "id": 5
-    },
-    {
-      "image": "blob:http://localhost:3001/69620130-9574-4fdc-88ac-3cf4932f6619",
-      "brand": "Porche",
-      "color": "Red",
-      "year": "2018",
-      "engineType": "2.2",
-      "fuelType": "Diesel",
-      "transmission": "Manual",
-      "date": "2021-09-03",
-      "id": 6
-    },
-    {
-      "image": "blob:http://localhost:3001/1c3f46ab-70de-425a-a208-cc0ad78d3227",
-      "brand": "Acura",
-      "color": "Grey",
-      "year": "2021",
-      "engineType": "2.2",
-      "fuelType": "Petrol",
-      "transmission": "Automatic",
-      "date": "2021-09-03",
-      "id": 7
-    },
-    {
-      "image": "blob:http://localhost:3001/19f46443-14b7-48e9-8b8f-c60c01cd365a",
-      "brand": "Ferrari",
-      "color": "Red",
-      "year": "2010",
-      "engineType": "1.8",
-      "fuelType": "Diesel",
-      "transmission": "Automatic",
-      "date": "2021-09-03",
-      "id": 8
-    },
-    {
-      "image": "blob:http://localhost:3001/ef92894c-08ca-4222-ad79-bd7b762edea6",
-      "brand": "McLaren",
-      "color": "Black",
-      "year": "2015",
-      "engineType": "2.9",
-      "fuelType": "Diesel",
-      "transmission": "Automatic",
-      "date": "2021-09-03",
-      "id": 9
     }
   ]
 }

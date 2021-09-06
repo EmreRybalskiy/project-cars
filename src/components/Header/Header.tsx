@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { NavLink } from 'react-router-dom';
 
 // Material UI
 import {
@@ -8,12 +9,11 @@ import {
   Typography,
 } from '@material-ui/core';
 // Components
+import SignUp from './Auth/SignUp';
+import SignIn from './Auth/SignIn';
 
 // Styles
-import { NavLink } from 'react-router-dom';
 import useStyles from './styles';
-import SignIn from './Auth/SignIn';
-import SignUp from './Auth/SignUp';
 
 const Header: FC = () => {
   const classes = useStyles();
