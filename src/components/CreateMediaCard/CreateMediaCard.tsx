@@ -23,6 +23,12 @@ import Dialog from '@material-ui/core/Dialog';
 // styles
 import useStyles from './styles';
 
+export const getDate = () : string => {
+  const today = new Date();
+  const date = today.toISOString().split('T')[0];
+  return date;
+};
+
 const CreateMediaCard: FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(false);
@@ -35,6 +41,7 @@ const CreateMediaCard: FC = () => {
     engineType: '',
     fuelType: '',
     transmission: '',
+    date: getDate(),
   });
 
   const isCar = car.image && car.brand
@@ -51,6 +58,7 @@ const CreateMediaCard: FC = () => {
       engineType: '',
       fuelType: '',
       transmission: '',
+      date: getDate(),
     });
   };
 
