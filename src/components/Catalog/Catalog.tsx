@@ -42,7 +42,8 @@ const Catalog: FC = () => {
   const [calendarDate, setCalendarDate] = useState({
     dateValue: '',
   });
-  // console.log(currentPage);
+
+  const [isDeleteCar, setIsDeleteCar] = useState<boolean>(false);
 
   useEffect(() => {
     checkUrlParams();
@@ -51,7 +52,7 @@ const Catalog: FC = () => {
 
   useEffect(() => {
     fetchCars();
-  }, [currentPage, brand, typeCar, date.dateValue]);
+  }, [currentPage, brand, typeCar, date.dateValue, isDeleteCar, isDeleteCar]);
 
   useEffect(() => {
     fetchCarsByDate();
@@ -66,7 +67,6 @@ const Catalog: FC = () => {
     const regex = /(?<=page=)\d+/;
     const value = history.location.search.match(regex);
     if (value != null) {
-      console.log('Take VALUE: ', +value[0]);
       setCurrentPage(+value[0]);
     }
   };
@@ -161,7 +161,7 @@ const Catalog: FC = () => {
         <Button onClick={handleDrawer} className={classes.filterBtn} variant="contained">Filter</Button>
       </Box>
       <Box>
-        <Cards cars={cars} loading={loading} error={error} />
+        <Cards cars={cars} loading={loading} error={error} setIsDeleteCar={setIsDeleteCar} />
         <Pagination
           carsPerPage={carsPerPage}
           totalCars={totalCars}

@@ -9,6 +9,9 @@ export interface Cars {
     id?: number;
     userId?: number;
     date?: string;
+    deleteCard?: (id: number) => void;
+    deleteCarFromFavorites?: (id: number) => void;
+    addFavoriteCard?: (id: number) => void;
   }
 
 export interface CardState {

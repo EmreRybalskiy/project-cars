@@ -1,6 +1,6 @@
+import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
 import MediaCard from 'components/MediaCard/MediaCard';
-import React, { FC, useState, useEffect } from 'react';
 import { Cars } from 'types/cars';
 
 import Loader from 'UI/Loader';
@@ -14,10 +14,16 @@ const Favorites: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>('');
 
+  const [isDeleteFav, setIsDeleteFav] = useState<boolean>(false);
+
   useEffect(() => {
     showFavorites();
     fetchCars();
   }, []);
+
+  useEffect(() => {
+    showFavorites();
+  }, [isDeleteFav]);
 
   const showFavorites = async () => {
     const userID = JSON.parse(localStorage.getItem('userID') as string);
@@ -31,6 +37,31 @@ const Favorites: FC = () => {
     } catch (e) {
       throw Error(e);
     }
+  };
+
+  const deleteCarFromFavorites = async (id: number) => {
+    const token = JSON.parse(localStorage.getItem('token') as string);
+    const userID = JSON.parse(localStorage.getItem('userID') as string);
+    try {
+      const getFavorites = await axios.get(`http://localhost:3000/600/users/${userID}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      const { favorites } = getFavorites.data;
+      const deletedFavoriteCar = favorites.filter((item: number) => item !== id);
+      await axios.patch(`http://localhost:3000/600/users/${userID}`, {
+        favorites: [...deletedFavoriteCar],
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setIsDeleteFav(true);
+    } catch (e) {
+      throw Error(e);
+    }
+    setIsDeleteFav(false);
   };
 
   const fetchCars = async () => {
@@ -62,8 +93,9 @@ const Favorites: FC = () => {
       {userFavorites ? (
         <div className={classes.wrapperCars}>
           {data.map((car: Cars) => {
-            const a = userFavorites.filter((el) => car.id === el);
-            if (car.id === +a) {
+            const fav = userFavorites.filter((el) => car.id === el);
+            console.log(car.id === +fav);
+            if (car.id === +fav) {
               return (
                 <MediaCard
                   id={car.id}
@@ -75,6 +107,7 @@ const Favorites: FC = () => {
                   engineType={car.engineType}
                   fuelType={car.fuelType}
                   transmission={car.transmission}
+                  deleteCarFromFavorites={deleteCarFromFavorites}
                 />
               );
             }

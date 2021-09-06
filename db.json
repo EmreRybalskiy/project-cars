@@ -4,43 +4,38 @@
       "email": "Emre12345@mail.ru",
       "password": "$2a$10$NnSAYZ9uCzehI47gTnT4Uu5lhn2I7Gfmy57wJBXDUNDpYp/0EgL2i",
       "name": "Emre",
-      "favorites": [],
+      "favorites": [
+        1,
+        2
+      ],
       "id": 1,
       "userId": 1
     },
     {
       "email": "James12345@mail.ru",
-      "password": "$2a$10$dhoj76DI/C3Illqt9p81IO.xrLEMDuycEiWWPEppUuw8JWYg0wJEC",
+      "password": "$2a$10$uIzTWeXGI.bdxHEX.wql4ezQQ8eJMDpET1udT7Y8xluTAx2PyEjXG",
       "name": "James",
-      "favorites": [],
-      "id": 2,
-      "test": "2"
-    },
-    {
-      "email": "Andrey12345@mail.ru",
-      "password": "$2a$10$3746yQJlqSjM01Ix6Ct5Oeigk5L6UB6vw5/B33K/E6ajcYDM51G4W",
-      "name": "Andrey",
-      "favorites": [],
-      "id": 3,
-      "test": "2"
-    },
-    {
-      "email": "easda@mail.rr",
-      "password": "$2a$10$o6P7W70ab2ZjPLfbipGqXeKwmE0ltXDLv40cuNnUVfB5mtd7Wfck2",
-      "id": 4
+      "favorites": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "id": 2
     }
   ],
   "cars": [
     {
-      "image": "blob:http://localhost:3001/256bc30e-9788-4ebc-aa89-dfa11c2146c4",
-      "brand": "3",
-      "color": "3",
-      "year": "3",
-      "engineType": "3",
-      "fuelType": "3",
-      "transmission": "3",
+      "image": "blob:http://localhost:3001/99c4f8b4-f128-4791-92b8-24d6113d53c4",
+      "brand": "1234",
+      "color": "1234",
+      "year": "1234",
+      "engineType": "3214",
+      "fuelType": "3214",
+      "transmission": "1234",
       "userId": 1,
-      "id": 3
+      "date": "2021-09-06",
+      "id": 4
     }
   ]
 }

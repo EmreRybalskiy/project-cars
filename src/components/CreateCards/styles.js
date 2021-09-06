@@ -31,7 +31,7 @@ const useStyles = makeStyles({
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
-    marginTop: '50px',
+    margin: '100px 0',
   },
   heading: {
     color: indigo[600],

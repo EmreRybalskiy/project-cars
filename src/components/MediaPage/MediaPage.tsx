@@ -3,14 +3,13 @@ import MediaCard from 'components/MediaCard/MediaCard';
 import { NavLink } from 'react-router-dom';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import IconButton from '@material-ui/core/IconButton';
-
 import useStyles from './styles';
 
 const MediaPage: FC = ({ location: { state } }: any) => {
   const classes = useStyles();
   return (
     <>
-      <NavLink to="/cars">
+      <NavLink to="/">
         <IconButton className={classes.iconBackPosition}>
           <KeyboardBackspaceIcon
             className={`${classes.icon} ${classes.iconBack}`}

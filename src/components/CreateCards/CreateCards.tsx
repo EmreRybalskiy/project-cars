@@ -2,7 +2,11 @@ import React, {
   ChangeEvent, FC, useState,
 } from 'react';
 import axios from 'axios';
-import { Cars } from 'types/cars';
+
+import {
+  Cars,
+} from 'types/cars';
+
 // MaterialUI
 import {
   Button,
@@ -11,9 +15,14 @@ import {
   Typography,
 } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-
 // styles
 import useStyles from './styles';
+
+export const getDate = () : string => {
+  const today = new Date();
+  const date = today.toISOString().split('T')[0];
+  return date;
+};
 
 const CreateCards: FC = () => {
   const classes = useStyles();
@@ -27,6 +36,7 @@ const CreateCards: FC = () => {
     fuelType: '',
     transmission: '',
     userId: 1,
+    date: getDate(),
   });
 
   const handleChangeDataCar = ({ target } : ChangeEvent<HTMLInputElement>): void => {
@@ -53,7 +63,7 @@ const CreateCards: FC = () => {
     }
   };
   return (
-    <>
+    <div className={classes.holderCards}>
       <Box className={classes.formWrapper}>
         <Typography className={classes.heading}>
           Create new Car
@@ -122,11 +132,12 @@ const CreateCards: FC = () => {
             </Button>
           </Box>
         </FormControl>
+
         <Button onClick={() => createCar()} color="primary" className={classes.createBtn}>
           Create
         </Button>
       </Box>
-    </>
+    </div>
   );
 };
 

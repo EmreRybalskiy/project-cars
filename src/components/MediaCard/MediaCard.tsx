@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import axios from 'axios';
 
 // Material UI
 import Card from '@material-ui/core/Card';
@@ -27,70 +26,14 @@ interface CardProps {
   fuelType?: string;
   transmission?: string;
   id?: number;
+  deleteCard?: (id: number) => void;
+  deleteCarFromFavorites?: (id: number) => void;
+  addFavoriteCard?: (id: number) => void;
 }
-
-const addFavoriteCard = async (id: number) => {
-  const token = JSON.parse(localStorage.getItem('token') as string);
-  const userID = JSON.parse(localStorage.getItem('userID') as string);
-  try {
-    const getUser = await axios({
-      method: 'get',
-      url: `http://localhost:3000/600/users/${userID}`,
-    });
-    const { favorites } = getUser.data;
-    const setNewFavorites = [...favorites, id];
-    const uniqueArray = setNewFavorites.filter((item: number, pos: number) => (
-      setNewFavorites.indexOf(item) === pos
-    ));
-    await axios.patch(`http://localhost:3000/600/users/${userID}`, {
-      favorites: [...uniqueArray],
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (e) {
-    throw Error(e);
-  }
-};
-
-const removeCar = async (id: number) => {
-  const token = JSON.parse(localStorage.getItem('token') as string);
-  const userID = JSON.parse(localStorage.getItem('userID') as string);
-  try {
-    const getUser = await axios({
-      method: 'get',
-      url: `http://localhost:3000/600/users/${userID}`,
-    });
-    const { favorites } = getUser.data;
-    const deletedFavoriteCar = favorites.filter((item: number) => item !== id);
-    await axios.patch(`http://localhost:3000/600/users/${userID}`, {
-      favorites: [...deletedFavoriteCar],
-    }, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (e) {
-    throw Error(e);
-  }
-};
-
-const deleteCard = async (id?: number) => {
-  const token = JSON.parse(localStorage.getItem('token') as string);
-  try {
-    await axios.delete(`http://localhost:3000/640/cars/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-  } catch (e) {
-    throw Error(e);
-  }
-};
 
 const MediaCard: FC<CardProps> = ({
   image, brand, color, year, engineType, fuelType, transmission, id,
+  deleteCard, deleteCarFromFavorites, addFavoriteCard,
 }: Cars) => {
   const classes = useStyles();
   const location = useLocation();
@@ -133,7 +76,7 @@ const MediaCard: FC<CardProps> = ({
         </>
         )}
       </CardContent>
-      {location.pathname === '/favorites' && <Button onClick={() => removeCar(id as number)} color="secondary">Remove from Favorites</Button>}
+      {location.pathname === '/favorites' && <Button onClick={() => deleteCarFromFavorites !== undefined && deleteCarFromFavorites(id as number)} color="secondary">Remove from Favorites</Button>}
       {(location.pathname === '/cars' || location.pathname === '/create' || location.pathname === '/favorites') ? (
         <Box>
           <Link to={{
@@ -153,16 +96,17 @@ const MediaCard: FC<CardProps> = ({
         {(location.pathname === `/car/${id}` || location.pathname === '/cars') ? (
           <>
             <FormControlLabel
-              onClick={() => addFavoriteCard(id as number)}
+              onClick={() => addFavoriteCard !== undefined && addFavoriteCard(id as number)}
               control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
-              label="Favorite"
+              label="Added"
+              disabled // todo
             />
           </>
         ) : null}
         {(location.pathname === '/cars' || location.pathname === `/car/${id}`)
         && (
         <CardActions className={classes.card}>
-          <DeleteIcon color="secondary" className={classes.icon} onClick={() => deleteCard(id as number)} />
+          <DeleteIcon color="secondary" className={classes.icon} onClick={() => deleteCard?.(id as number)} />
         </CardActions>
         )}
       </Box>
