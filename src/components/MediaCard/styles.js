@@ -21,11 +21,15 @@ const useStyles = makeStyles({
     fontSize: 30,
   },
   iconHolder: {
-    width: '100%',
     display: 'flex',
     justifyContent: 'space-between',
   },
   cardFooter: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
+  create: {
+    flexBasis: '70px',
     display: 'flex',
     justifyContent: 'space-between',
   },

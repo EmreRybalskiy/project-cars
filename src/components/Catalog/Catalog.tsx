@@ -25,7 +25,7 @@ const Catalog: FC = () => {
   const [error, setError] = useState<string>('');
 
   const [currentPage, setCurrentPage] = useState(1);
-  const [carsPerPage] = useState(5);
+  const [carsPerPage] = useState(2);
 
   useEffect(() => {
     checkUrlParams();

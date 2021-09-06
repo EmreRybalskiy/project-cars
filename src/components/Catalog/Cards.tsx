@@ -1,8 +1,15 @@
 import React, { FC } from 'react';
+// Material UI
 import { Cars } from 'types/cars';
-import Loading from '../../UI/Loader';
-import useStyles from './styles';
 import MediaCard from '../MediaCard/MediaCard';
+
+// Comonents
+import Loading from '../../UI/Loader';
+
+// types
+
+// styles
+import useStyles from './styles';
 
 interface CardsProps {
   cars: Cars[];
@@ -19,6 +26,7 @@ const Cards: FC<CardsProps> = ({ cars, loading, error }: CardsProps) => {
   if (error) {
     return <h2>{error}</h2>;
   }
+
   return (
     <div className={classes.holder}>
       {cars.map((car: Cars) => (

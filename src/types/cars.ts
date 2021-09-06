@@ -7,6 +7,7 @@ export interface Cars {
     fuelType?: string;
     transmission?: string;
     id?: number;
+    userId?: number;
   }
 
 export interface CardState {

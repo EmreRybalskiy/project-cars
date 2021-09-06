@@ -25,16 +25,18 @@ const useStyles = makeStyles({
     width: '100%',
     height: '100%',
   },
-  holderDialog: {
-    width: 600,
-    height: 500,
+  formWrapper: {
+    width: 500,
+    height: 400,
     textAlign: 'center',
+    display: 'flex',
+    flexDirection: 'column',
+    marginTop: '50px',
   },
-  dialogTitle: {
+  heading: {
     color: indigo[600],
-  },
-  formControl: {
-    width: '80%',
+    fontWeight: 'bold',
+    fontSize: '20px',
   },
   field: {
     marginBottom: 10,
@@ -46,6 +48,13 @@ const useStyles = makeStyles({
   check: {
     color: green[600],
     margin: '5px 0 0 10px',
+  },
+  createBtn: {
+    width: '20%',
+    display: 'block',
+    marginRight: '0',
+    marginLeft: 'auto',
+    fontWeight: 'bold',
   },
 });
 
