@@ -1,7 +1,10 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { teal } from '@material-ui/core/colors';
+import { teal, red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
+  catalogWrapper: {
+    marginTop: '50px',
+  },
   holder: {
     display: 'flex',
     flexFlow: 'row wrap',
@@ -30,6 +33,33 @@ const useStyles = makeStyles({
   paginationItemActive: {
     backgroundColor: `${teal[400]}`,
     color: teal[100],
+  },
+  filterBtn: {
+    color: teal[400],
+    position: 'absolute',
+    top: '75px',
+    left: '100px',
+  },
+  drawer: {
+    maxWidth: '400px',
+    backgroundColor: teal[400],
+  },
+  listWrapper: {
+    width: '300px',
+  },
+  itemHolder: {
+    width: '100%',
+  },
+  listItem: {
+    width: '100%',
+  },
+  acceptBtnWarpper: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: 20,
+  },
+  notFound: {
+    color: red[500],
   },
 });
 

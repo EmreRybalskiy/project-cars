@@ -17,8 +17,11 @@ interface CardsProps {
   error: string | null;
 }
 
-const Cards: FC<CardsProps> = ({ cars, loading, error }: CardsProps) => {
+const Cards: FC<CardsProps> = ({
+  cars, loading, error,
+}: CardsProps) => {
   const classes = useStyles();
+
   if (loading) {
     return <h2><Loading /></h2>;
   }
@@ -29,6 +32,8 @@ const Cards: FC<CardsProps> = ({ cars, loading, error }: CardsProps) => {
 
   return (
     <div className={classes.holder}>
+      {cars.length === 0 && <h2 className={classes.notFound}>Cars not Found</h2>}
+
       {cars.map((car: Cars) => (
         <MediaCard
           id={car.id}

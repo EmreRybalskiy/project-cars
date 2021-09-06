@@ -8,6 +8,7 @@ export interface Cars {
     transmission?: string;
     id?: number;
     userId?: number;
+    date?: string;
   }
 
 export interface CardState {
