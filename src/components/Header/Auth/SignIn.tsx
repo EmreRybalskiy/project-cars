@@ -66,7 +66,7 @@ const SignIn: FC = () => {
   };
 
   const handleLogout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     setUserName('');
     setIsLoggin(false);
     closeMenu();
@@ -83,8 +83,8 @@ const SignIn: FC = () => {
       }
       const userId = response.data.user.id;
       const token = response.data.accessToken;
-      localStorage.setItem('token', JSON.stringify(token));
-      localStorage.setItem('userID', JSON.stringify(userId));
+      sessionStorage.setItem('token', JSON.stringify(token));
+      sessionStorage.setItem('userID', JSON.stringify(userId));
       setAuthorizationToken(token);
       setIsLoggin(true);
     } catch (e) {

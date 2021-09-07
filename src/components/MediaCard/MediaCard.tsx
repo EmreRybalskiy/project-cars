@@ -47,31 +47,33 @@ const MediaCard: FC<CardProps> = ({
       />
       <CardContent className={classes.cardContent}>
         <Typography gutterBottom variant="h5" component="h2">
-          Brand:
-          {brand}
+          <strong className={classes.categoryName}>Brand:</strong>
+          <span className={classes.text}>
+            {brand}
+          </span>
         </Typography>
         <Typography gutterBottom component="p">
-          Color:
-          {color}
+          <strong className={classes.categoryName}>Color:</strong>
+          <span className={classes.text}>{color}</span>
         </Typography>
         {location.pathname === `/car/${id}` && (
         <>
           {' '}
-          <Typography variant="body2" color="textSecondary" component="p">
-            Year:
-            {year}
+          <Typography variant="body2" component="p">
+            <strong className={classes.categoryName}>Year:</strong>
+            <span className={classes.text}>{year}</span>
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Endine Type:
-            {engineType}
+          <Typography variant="body2" component="p">
+            <strong className={classes.categoryName}>Endine Type:</strong>
+            <span className={classes.text}>{engineType}</span>
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Fuel Type:
-            {fuelType}
+          <Typography variant="body2" component="p">
+            <strong className={classes.categoryName}>Fuel Type:</strong>
+            <span className={classes.text}>{fuelType}</span>
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Transmission:
-            {transmission}
+          <Typography variant="body2" component="p">
+            <strong className={classes.categoryName}>Transmission:</strong>
+            <span className={classes.text}>{transmission}</span>
           </Typography>
         </>
         )}
@@ -98,14 +100,13 @@ const MediaCard: FC<CardProps> = ({
             <FormControlLabel
               onClick={() => addFavoriteCard !== undefined && addFavoriteCard(id as number)}
               control={<Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="checkedH" />}
-              label="Added"
-              disabled // todo
+              label="Favorite"
             />
           </>
         ) : null}
         {(location.pathname === '/cars' || location.pathname === `/car/${id}`)
         && (
-        <CardActions className={classes.card}>
+        <CardActions>
           <DeleteIcon color="secondary" className={classes.icon} onClick={() => deleteCard?.(id as number)} />
         </CardActions>
         )}

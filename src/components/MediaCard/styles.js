@@ -14,7 +14,8 @@ const useStyles = makeStyles({
     flexDirection: 'column',
   },
   media: {
-    height: 150,
+    height: '200px',
+    width: 'auto',
   },
   icon: {
     cursor: 'pointer',
@@ -32,6 +33,19 @@ const useStyles = makeStyles({
     flexBasis: '70px',
     display: 'flex',
     justifyContent: 'space-between',
+  },
+  delete: {
+    width: 20,
+  },
+  categoryName: {
+    fontWeight: 'bold',
+    fontSize: 15,
+    marginRight: 5,
+    textDecoration: 'underline',
+  },
+  text: {
+    marginLeft: '5px',
+    fontSize: 18,
   },
 });
 

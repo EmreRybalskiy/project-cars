@@ -9,7 +9,7 @@ const MediaPage: FC = ({ location: { state } }: any) => {
   const classes = useStyles();
   return (
     <>
-      <NavLink to="/">
+      <NavLink to="/cars">
         <IconButton className={classes.iconBackPosition}>
           <KeyboardBackspaceIcon
             className={`${classes.icon} ${classes.iconBack}`}

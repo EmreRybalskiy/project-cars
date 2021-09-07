@@ -33,7 +33,7 @@ const Cards: FC<CardsProps> = ({
   }
 
   const deleteCard = async (id?: number) => {
-    const token = JSON.parse(localStorage.getItem('token') as string);
+    const token = JSON.parse(sessionStorage.getItem('token') as string);
     try {
       await axios.delete(`http://localhost:3000/640/cars/${id}`, {
         headers: {
@@ -50,8 +50,8 @@ const Cards: FC<CardsProps> = ({
   };
 
   const addFavoriteCard = async (id: number) => {
-    const token = JSON.parse(localStorage.getItem('token') as string);
-    const userID = JSON.parse(localStorage.getItem('userID') as string);
+    const token = JSON.parse(sessionStorage.getItem('token') as string);
+    const userID = JSON.parse(sessionStorage.getItem('userID') as string);
     try {
       const getUser = await axios({
         method: 'get',
@@ -76,8 +76,6 @@ const Cards: FC<CardsProps> = ({
 
   return (
     <div className={classes.holder}>
-      {cars.length === 0 && <h2 className={classes.notFound}>Cars not Found</h2>}
-
       {cars.map((car: Cars) => (
         <MediaCard
           id={car.id}

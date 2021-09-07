@@ -1,5 +1,5 @@
 export interface Cars {
-    image: string,
+    image: any,
     brand: string,
     color: string,
     year?: string,

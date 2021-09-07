@@ -104,9 +104,9 @@ const Catalog: FC = () => {
         setTotalCars(responseFilter.data);
         setCars(response.data);
       } else {
-        fetchCars();
+        setCars([]);
+        setTotalCars([]);
       }
-
       setLoading(false);
     } catch (e) {
       setError(e);
@@ -161,7 +161,12 @@ const Catalog: FC = () => {
         <Button onClick={handleDrawer} className={classes.filterBtn} variant="contained">Filter</Button>
       </Box>
       <Box>
-        <Cards cars={cars} loading={loading} error={error} setIsDeleteCar={setIsDeleteCar} />
+        <Cards
+          cars={cars}
+          loading={loading}
+          error={error}
+          setIsDeleteCar={setIsDeleteCar}
+        />
         <Pagination
           carsPerPage={carsPerPage}
           totalCars={totalCars}

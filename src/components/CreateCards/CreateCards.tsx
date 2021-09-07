@@ -2,7 +2,6 @@ import React, {
   ChangeEvent, FC, useState,
 } from 'react';
 import axios from 'axios';
-
 import {
   Cars,
 } from 'types/cars';
@@ -39,6 +38,21 @@ const CreateCards: FC = () => {
     date: getDate(),
   });
 
+  const cleaning = () => {
+    setCar({
+      image: '',
+      brand: '',
+      color: '',
+      year: '',
+      engineType: '',
+      fuelType: '',
+      transmission: '',
+      userId: 1,
+      date: getDate(),
+    });
+    console.log('cleaning');
+  };
+
   const handleChangeDataCar = ({ target } : ChangeEvent<HTMLInputElement>): void => {
     setCar((prev) => ({
       ...prev,
@@ -48,11 +62,15 @@ const CreateCards: FC = () => {
 
   const upLoadImage = ({ target } : ChangeEvent<HTMLInputElement>): void => {
     if (target.files !== null && target.files.length !== 0) {
-      const file = URL.createObjectURL(target.files[0]);
-      setCar((prev) => ({
-        ...prev,
-        image: file,
-      }));
+      const reader = new FileReader();
+      const file = target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = function () {
+        setCar((prev) => ({
+          ...prev,
+          image: reader.result,
+        }));
+      };
     }
   };
   const createCar = async () => {
@@ -61,6 +79,8 @@ const CreateCards: FC = () => {
     } catch (e) {
       throw Error(e);
     }
+    cleaning();
+    console.log(car);
   };
   return (
     <div className={classes.holderCards}>
