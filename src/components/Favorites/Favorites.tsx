@@ -26,7 +26,7 @@ const Favorites: FC = () => {
   }, [isDeleteFav]);
 
   const showFavorites = async () => {
-    const userID = JSON.parse(sessionStorage.getItem('userID') as string);
+    const userID = JSON.parse(localStorage.getItem('userID') as string);
     try {
       const getUser = await axios({
         method: 'get',
@@ -40,8 +40,8 @@ const Favorites: FC = () => {
   };
 
   const deleteCarFromFavorites = async (id: number) => {
-    const token = JSON.parse(sessionStorage.getItem('token') as string);
-    const userID = JSON.parse(sessionStorage.getItem('userID') as string);
+    const token = JSON.parse(localStorage.getItem('token') as string);
+    const userID = JSON.parse(localStorage.getItem('userID') as string);
     try {
       const getFavorites = await axios.get(`http://localhost:3000/600/users/${userID}`, {
         headers: {
